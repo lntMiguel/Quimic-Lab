@@ -29,11 +29,11 @@ int main() {
 
 	ALLEGRO_BITMAP* bicarbonato;
 	bicarbonato = al_load_bitmap("imagens/bicarbonato.png");
-	al_convert_mask_to_alpha(bicarbonato, al_map_rgb(0, 0, 0));
+	al_convert_mask_to_alpha(bicarbonato, al_map_rgb(235, 51, 36));
 
 	ALLEGRO_BITMAP* recipiente;
 	recipiente = al_load_bitmap("imagens/recipiente.png");
-	al_convert_mask_to_alpha(recipiente, al_map_rgb(57, 16, 123));
+	al_convert_mask_to_alpha(recipiente, al_map_rgb(235, 51, 36));
 
 	ALLEGRO_TIMER* timer = al_create_timer(1.0 / 60.0);
 
