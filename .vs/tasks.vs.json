@@ -1,0 +1,10 @@
+{
+  "version": "0.2.1",
+  "tasks": [
+    {
+      "taskLabel": "tarefa-botoes",
+      "appliesTo": "Jogo 2D/botoes.c",
+      "type": "launch"
+    }
+  ]
+}

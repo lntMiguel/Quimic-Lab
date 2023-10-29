@@ -4,113 +4,125 @@
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_ttf.h>
 #include <stdbool.h>
+#include <allegro5/allegro_ttf.h>
+#include "Jogo 2D/botoes.h"
+
+//variaveis globais
+int width = 900, height = 600;
+int mouseX, mouseY;
+ALLEGRO_BITMAP *buffer, *background, *vinagreImg, *bicarbonatoImg, *recipiente;
 
 int main() {
-
+	//inicialização
 	al_init();
 	al_init_image_addon();
 	al_init_font_addon();
 	al_init_ttf_addon();
 	al_install_mouse();
-
-	ALLEGRO_DISPLAY* display = NULL;
-	display = al_create_display(1213, 681);
+	
+	//criando variaveis globais e populando 
+	ALLEGRO_DISPLAY* display = al_create_display(1213, 681);
 	al_set_window_title(display, "Prova de conceito - PI");
-
-	ALLEGRO_EVENT_QUEUE* filaDeEventos = NULL;
-	filaDeEventos = al_create_event_queue();
-	al_register_event_source(filaDeEventos, al_get_display_event_source(display));
-
-	ALLEGRO_BITMAP* background;
-	background = al_load_bitmap("imagens/fundo.png");
-
-	ALLEGRO_BITMAP* cientista;
-	cientista = al_load_bitmap("imagens/cientista.png");
-	al_convert_mask_to_alpha(cientista, al_map_rgb(255, 255, 255));
-
-	ALLEGRO_BITMAP* vinagre;
-	vinagre = al_load_bitmap("imagens/vinagre.png");
-	al_convert_mask_to_alpha(vinagre, al_map_rgb(255, 255, 255));
-
-	ALLEGRO_BITMAP* bicarbonato;
-	bicarbonato = al_load_bitmap("imagens/bicarbonato.png");
-	al_convert_mask_to_alpha(bicarbonato, al_map_rgb(235, 51, 36));
-
-	ALLEGRO_BITMAP* recipiente;
-	recipiente = al_load_bitmap("imagens/recipiente.png");
-	al_convert_mask_to_alpha(recipiente, al_map_rgb(235, 51, 36));
-
-	ALLEGRO_FONT* bicarboText;
-	bicarboText = al_load_ttf_font("fontes/fonte2.ttf", 24, 0);
-
-	ALLEGRO_FONT* vinagreText;
-	vinagreText = al_load_ttf_font("fontes/fonte2.ttf", 24, 0);
-
-	ALLEGRO_FONT* recipText;
-	recipText = al_load_ttf_font("fontes/fonte2.ttf", 24, 0);
-
-	ALLEGRO_MOUSE_CURSOR* cursor;
-	cursor = al_create_mouse_cursor(background, 0, 0);
-
+	ALLEGRO_EVENT_QUEUE* filaDeEventos = filaDeEventos = al_create_event_queue();
+	ALLEGRO_FONT* font = al_create_builtin_font();
 	ALLEGRO_TIMER* timer = al_create_timer(1.0 / 60.0);
+	ALLEGRO_BITMAP* cientista;
+	buffer = al_create_bitmap(width, height);
+	al_register_event_source(filaDeEventos, al_get_display_event_source(display));
+	background = al_load_bitmap("imagens/fundo.png");	
+	cientista = al_load_bitmap("imagens/cientista.png");
+	vinagreImg = al_load_bitmap("imagens/vinagre.png");
+	bicarbonatoImg = al_load_bitmap("imagens/bicarbonato.png");
+	Botoes* vinagre = criarBotao(101, 74, 800, 300, 82, 152, vinagreImg);
+	Botoes* bicarbonato = criarBotao(46, 50, 450, 350, 108, 100, bicarbonatoImg);
+	recipiente = al_load_bitmap("imagens/recipiente.png");
 
+	//registrando eventos
 	al_register_event_source(filaDeEventos, al_get_timer_event_source(timer));
 	al_register_event_source(filaDeEventos, al_get_mouse_event_source());
 
+	//start timer
 	al_start_timer(timer);
 
-	bool jogando = true;
-
+	// variaveis booleanas
+	bool jogando = true, clicouVinagre = false, errou = false, concluido = false;
+	
 	while (jogando) {
-
+		
+		//registrando eventos
 		ALLEGRO_EVENT evento;
 		al_wait_for_event(filaDeEventos, &evento);
 
+		//fechar janela
 		if (evento.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
 			jogando = false;
 		}
 
+		//registrando posição do mouse
 		else if (evento.type == ALLEGRO_EVENT_MOUSE_AXES) {
+			mouseX = evento.mouse.x;
+			mouseY = evento.mouse.y;
 
-			int mouseX = evento.mouse.x;
-			int mouseY = evento.mouse.y;
-
-			if (mouseX >= 400 && mouseX <= 400 + al_get_bitmap_width(bicarbonato) && mouseY >= 380 && mouseY <= 380 + al_get_bitmap_height(bicarbonato)) {
-				al_set_system_mouse_cursor(display, ALLEGRO_SYSTEM_MOUSE_CURSOR_LINK);
-			}
-			else {
-				al_set_system_mouse_cursor(display, ALLEGRO_SYSTEM_MOUSE_CURSOR_DEFAULT);
-			}
 		}
 		
-		if (evento.type == ALLEGRO_EVENT_TIMER) {
+		//desenhos
 
-			al_clear_to_color(al_map_rgb(255, 0, 255));
-			al_draw_bitmap(background, 0, 0, 0);
-			al_draw_bitmap(cientista, 150, 300, 0);
-			al_draw_bitmap(vinagre, 750, 300, 0);
-			al_draw_bitmap(bicarbonato, 400, 370, 0);
-			al_draw_bitmap(recipiente, 590, 250, 0);
+		al_clear_to_color(al_map_rgb(255, 0, 255));
+		al_draw_bitmap(background, 0, 0, 0);
+		al_draw_bitmap(cientista, 150, 300, 0);
+		desenharBotao(vinagre);
+		desenharBotao(bicarbonato);
+		al_draw_bitmap(recipiente, 590, 250, 0);
 
-			al_draw_text(bicarboText, al_map_rgb(0, 0, 0), 500, 370, ALLEGRO_ALIGN_CENTER, "Bicarbonato");
-			al_draw_text(vinagreText, al_map_rgb(0, 0, 0), 890, 320, ALLEGRO_ALIGN_CENTER, "Vinagre");
-			al_draw_text(recipText, al_map_rgb(0, 0, 0), 700, 280, ALLEGRO_ALIGN_CENTER, "Recipiente (VAZIO)");
-
-			al_flip_display();
+		//logica de jogo
+		if (inputBotao(vinagre, mouseX, mouseY)) {
+			
+			al_draw_text(font, al_map_rgb(0, 0, 0), 800, 250, 0, "vinagre");
+				
+			if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN && evento.mouse.button == 1) {
+				
+				clicouVinagre = true;
+				recipiente = al_load_bitmap("imagens/recipienteVinagre.png");
+				
+			}
+			
 		}
+			
+		else if (inputBotao(bicarbonato, mouseX, mouseY)) {
+				
+			al_draw_text(font, al_map_rgb(0, 0, 0), 450, 250, 0, "Bicarbonato");
+			if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN && evento.mouse.button == 1) {
+				
+				if (clicouVinagre == true) {
+					recipiente = al_load_bitmap("imagens/recipienteVB.png");
+					concluido = true;
+				}
+				else
+					errou = true;
+			}
+			 
+		}
+			if(errou)
+				al_draw_text(font, al_map_rgb(0, 0, 0), 800, 250, 0, "Fez Errado");
+
+			if (concluido) {
+				recipiente = al_load_bitmap("imagens/recipienteFeito.png");
+				al_draw_text(font, al_map_rgb(0, 0, 0), 800, 250, 0, "Reacao concluida");
+				
+			}
+
+		al_flip_display();
+		
 	}
 
 	al_destroy_display(display);
 	al_destroy_event_queue(filaDeEventos);
 	al_destroy_bitmap(cientista);
 	al_destroy_bitmap(background);
-	al_destroy_bitmap(vinagre);
-	al_destroy_bitmap(bicarbonato);
+	destruirBotao(vinagre);
+	destruirBotao(bicarbonato);
 	al_destroy_bitmap(recipiente);
-	al_destroy_font(bicarboText);
-	al_destroy_font(vinagreText);
-	al_destroy_font(recipText);
-	al_destroy_mouse_cursor(cursor);
-
+	
+	
 	return 0;
 }
