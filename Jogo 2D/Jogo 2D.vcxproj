@@ -145,10 +145,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\main.c" />
-    <ClCompile Include="botoes.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="botoes.h" />
+    <ClInclude Include="AcidoCarbonico.h" />
+    <ClInclude Include="teste.h" />
+    <ClInclude Include="Funcoes.h" />
+    <ClInclude Include="mudarReacao.h" />
+    <ClInclude Include="Struct.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
