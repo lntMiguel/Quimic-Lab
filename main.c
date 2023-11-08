@@ -54,7 +54,7 @@ int main() {
 	
 	progresso.proximaReacao = 0;
 	progresso.fimDeJogo = 0;
-	
+	;
 	progresso.reacoes[0] = 0;
 	progresso.reacoes[1] = 0;
 	progresso.reacoes[2] = 0;
