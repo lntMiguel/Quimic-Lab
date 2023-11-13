@@ -19,7 +19,9 @@ int jogarAcInverso(ALLEGRO_DISPLAY* display, ALLEGRO_EVENT_QUEUE* filaDeEventos,
 		ALLEGRO_EVENT evento;
 		al_wait_for_event(filaDeEventos, &evento);
 
+		//fechar janela
 		if (evento.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
+
 			sair = true;
 			progresso->fimDeJogo = true;
 		}

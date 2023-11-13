@@ -148,6 +148,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AcidoCarbonico.h" />
+    <ClInclude Include="skillTest.h" />
     <ClInclude Include="teste.h" />
     <ClInclude Include="Funcoes.h" />
     <ClInclude Include="mudarReacao.h" />
