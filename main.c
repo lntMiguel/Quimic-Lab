@@ -8,6 +8,7 @@
 #include <allegro5/allegro_ttf.h>
 #include "Jogo 2D/Struct.h"
 #include "Jogo 2D/mudarReacao.h"
+#include <allegro5/allegro_primitives.h>
 
 
 //variaveis globais
@@ -19,6 +20,7 @@ int main() {
 	al_init_font_addon();
 	al_init_ttf_addon();
 	al_install_mouse();
+	al_init_primitives_addon();
 	
 	//Display
 	ALLEGRO_DISPLAY* display = al_create_display(1213, 681);
@@ -40,6 +42,7 @@ int main() {
 
 		return -1;
 	}
+
 
 	ALLEGRO_TIMER* timer = al_create_timer(1.0 / 60.0);
 
@@ -84,8 +87,8 @@ int main() {
 	                   
 	progresso.cenario->vinagre = (Objeto*)malloc(sizeof(Objeto));
 	progresso.cenario->vinagre->imagem = al_load_bitmap("imagens/vinagre.png");
-	progresso.cenario->vinagre->altura = 82;
-	progresso.cenario->vinagre->largura = 152;
+	progresso.cenario->vinagre->altura = 152;
+	progresso.cenario->vinagre->largura = 82;
 	progresso.cenario->vinagre->wx = 0;
 	progresso.cenario->vinagre->wy = 0;
 	progresso.cenario->vinagre->x = 800;

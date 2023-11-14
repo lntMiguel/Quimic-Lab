@@ -9,9 +9,19 @@
 #include "Struct.h"
 #include <stdbool.h>
 #include "skillTest.h"
+
+int mouseX;
+int mouseY;
+
 //Função central da fase
 int jogarAcidoCarbonico(ALLEGRO_DISPLAY* display, ALLEGRO_EVENT_QUEUE* filaDeEventos, Prog* progresso){
 	
+	/*Duvidas: 
+	Existe um jeito mais elegante de fazer?
+	Criar estado de clicavel nos elementos?
+	como corrigir a seta bugada?*/
+
+
 	//struct do recipiente
 	Objeto* recipiente;
 	recipiente = (Objeto*)malloc(sizeof(Objeto));
@@ -22,36 +32,6 @@ int jogarAcidoCarbonico(ALLEGRO_DISPLAY* display, ALLEGRO_EVENT_QUEUE* filaDeEve
 	recipiente->wy = 0;
 	recipiente->x = 590;
 	recipiente->y = 250;
-
-	Objeto* seta;
-	seta = (Objeto*)malloc(sizeof(Objeto));
-	seta->altura = 32;
-	seta->largura = 24;
-	seta->imagem = al_load_bitmap("imagens/seta.png");
-	seta->wx = 4;
-	seta->wy = 0;
-	seta->x = 0;
-	seta->y = 0;
-
-	Objeto* teste;
-	teste = (Objeto*)malloc(sizeof(Objeto));
-	teste->altura = 32;
-	teste->largura = 24;
-	teste->imagem = al_load_bitmap("imagens/acerteVerde.png");
-	teste->wx = 0;
-	teste->wy = 0;
-	teste->x = 0;
-	teste->y = 0;
-
-	Objeto* botao;
-	botao = (Objeto*)malloc(sizeof(Objeto));
-	botao->altura = 32;
-	botao->largura = 24;
-	botao->imagem = al_load_bitmap("imagens/botaoAdicionar.png");
-	botao->wx = 0;
-	botao->wy = 0;
-	botao->x = 0;
-	botao->y = 0;
 
 	//fonte
 	ALLEGRO_FONT* font;
@@ -65,20 +45,18 @@ int jogarAcidoCarbonico(ALLEGRO_DISPLAY* display, ALLEGRO_EVENT_QUEUE* filaDeEve
 	
 	bool sair = false;
 	
-	int mouseX;
-	int mouseY;
-	
 	//estados da fase
 	enum Estados {
 		inicio,
 		clicouVinagre,
 		clicouBicarbonato,
 		errou,
-		acertou,
-		st
+		acertou
+
 	};
 	
 	bool podeClicar = true;
+
 	enum Estados estado = inicio;
 	
 	//looping principal
@@ -94,27 +72,38 @@ int jogarAcidoCarbonico(ALLEGRO_DISPLAY* display, ALLEGRO_EVENT_QUEUE* filaDeEve
 			sair = true;
 			progresso->fimDeJogo = true;
 		}
-
+		
 		//registrando posição do mouse
 		else if (evento.type == ALLEGRO_EVENT_MOUSE_AXES) {
 
 			mouseX = evento.mouse.x;
 			mouseY = evento.mouse.y;
 		}
-
+		if (estado == clicouBicarbonato) {
+			recipiente->imagem = recipienteFeito;
+			al_rest(1);
+			estado = acertou;
+		}
+		
 		//registrando clique do mouse
 		else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN && evento.mouse.button == 1 && podeClicar) {
 			
 			//clique no vinagre
-			if (mouseHover(evento.mouse.x, evento.mouse.y, progresso->cenario->vinagre)) {
-				estado = clicouVinagre;
-				acerteVerde(display, filaDeEventos, progresso);
-				recipiente->imagem = recipienteVinagre;
+			if (mouseHover(mouseX,mouseY, progresso->cenario->vinagre)) {
+				
+				bool  resultado = acerteVerde(display, filaDeEventos, progresso);
+				if (resultado == true) {
+					estado = clicouVinagre;
+					recipiente->imagem = recipienteVinagre;
+				}
+				else {
+					estado = errou;
+				}
 
 			}
 		
 			//clique no bicarbonato
-			else if (mouseHover(evento.mouse.x, evento.mouse.y, progresso->cenario->bicarbonato)) {
+			else if (mouseHover(mouseX, mouseY, progresso->cenario->bicarbonato)) {
 				
 				if (!estado == clicouVinagre) {
 					estado = errou;
@@ -123,24 +112,25 @@ int jogarAcidoCarbonico(ALLEGRO_DISPLAY* display, ALLEGRO_EVENT_QUEUE* filaDeEve
 				else {
 					estado = clicouBicarbonato;
 					recipiente->imagem = recipienteBicarbonato;
+					
 				}
 			}
 		}
-
+		
 		//desenhos
-		al_clear_to_color(al_map_rgb(255, 0, 255));
+		al_clear_to_color(al_map_rgb(255, 255, 255));
 		al_draw_bitmap(progresso->cenario->fundo, 0, 0, 0);
 		al_draw_bitmap(progresso->cenario->bicarbonato->imagem, progresso->cenario->bicarbonato->x, progresso->cenario->bicarbonato->y, 0);
 		al_draw_bitmap(progresso->cenario->vinagre->imagem, progresso->cenario->vinagre->x, progresso->cenario->vinagre->y, 0);
 		al_draw_bitmap(recipiente->imagem, recipiente->x, recipiente->y, 0);
-
+		
 		//texto quando o mouse passar em cima dos elementos 
-		if (mouseHover(evento.mouse.x, evento.mouse.y, progresso->cenario->vinagre) && podeClicar) {
+		if (mouseHover(mouseX, mouseY, progresso->cenario->vinagre) && podeClicar) {
 
 			al_draw_text(font, al_map_rgb(0, 0, 0), 730, 250, 0, "Vinagre (CH3COOH)");
 		}
 		
-		else if (mouseHover(evento.mouse.x, evento.mouse.y, progresso->cenario->bicarbonato) && podeClicar) {
+		else if (mouseHover(mouseX,mouseY, progresso->cenario->bicarbonato) && podeClicar) {
 
 			al_draw_text(font, al_map_rgb(0, 0, 0), 380, 300, 0, "Bicarbonato (NaHCO3)");
 		}
