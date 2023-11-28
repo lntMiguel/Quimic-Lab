@@ -14,6 +14,7 @@
 #include <allegro5/allegro_primitives.h>
 
 int mouseX, mouseY;
+
 bool acerteVerde(ALLEGRO_DISPLAY* display, ALLEGRO_EVENT_QUEUE* filaDeEventos, Prog* progresso) {
 
 	Objeto* seta;
@@ -23,24 +24,27 @@ bool acerteVerde(ALLEGRO_DISPLAY* display, ALLEGRO_EVENT_QUEUE* filaDeEventos, P
 	seta->imagem = al_load_bitmap("imagens/seta.png");
 	seta->wx = 4;
 	seta->wy = 0;
-	seta->x = 501;
+	seta->x = 503;
 	seta->y = 345;
 
 	Objeto* teste;
 	teste = (Objeto*)malloc(sizeof(Objeto));
-	teste->altura = 32;
-	teste->largura = 24;
-	teste->imagem = al_load_bitmap("imagens/acerteVerde.png");
+	teste->altura = 75;
+	teste->largura = 500;
+	teste->imagem = al_load_bitmap("imagens/barra.png");
 	teste->wx = 0;
 	teste->wy = 0;
 	teste->x = 500;
 	teste->y = 340;
 
+	ALLEGRO_BITMAP* botaoAdd = al_load_bitmap("imagens/btAdd.png");
+	ALLEGRO_BITMAP* botaoAddH = al_load_bitmap("imagens/adss.png");
+	
 	Objeto* botao;
 	botao = (Objeto*)malloc(sizeof(Objeto));
-	botao->altura = 83;
-	botao->largura = 279;
-	botao->imagem = al_load_bitmap("imagens/botaoAdicionar.png");
+	botao->altura = 98;
+	botao->largura = 308;
+	botao->imagem = botaoAdd;
 	botao->wx = 0;
 	botao->wy = 0;
 	botao->x = 609;
@@ -48,8 +52,9 @@ bool acerteVerde(ALLEGRO_DISPLAY* display, ALLEGRO_EVENT_QUEUE* filaDeEventos, P
 
 	bool sair = false;
 	bool acertou = false;
-	int velocidade = 1;
+	int velocidade = 2;
 	al_init_primitives_addon();
+	
 	ALLEGRO_FONT* font;
 	font = al_load_ttf_font("fontes/fonte2.ttf", 20, 0);
 	
@@ -75,8 +80,9 @@ bool acerteVerde(ALLEGRO_DISPLAY* display, ALLEGRO_EVENT_QUEUE* filaDeEventos, P
 
 		else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN && evento.mouse.button == 1) {
 
-			if (mouseHover(mouseX, mouseY, botao)) {
-				if (seta->x >= 709 && seta->x <= 767) {
+			if (mouseHover(mouseX, mouseY, botao->x, botao->y, botao->largura, botao->altura)) {
+				
+				if (seta->x >= 689 && seta->x <= 777) {
 					acertou = true;
 				}
 
@@ -84,25 +90,31 @@ bool acerteVerde(ALLEGRO_DISPLAY* display, ALLEGRO_EVENT_QUEUE* filaDeEventos, P
 			}
 
 		}
-
+		
+		if (mouseHover(mouseX, mouseY, botao->x, botao->y, botao->largura, botao->altura)) {
+			botao->imagem = botaoAddH;
+		}
+		else
+			botao->imagem = botaoAdd;
+			
+		//al_draw_bitmap(progresso->cenario->fundo, 0, 0, 0); 
+		//desenhaRegentes(progresso);
 		al_draw_bitmap(teste->imagem, teste->x, teste->y, 0);
 		al_draw_bitmap(seta->imagem, seta->x, seta->y, 0);
 		al_draw_bitmap(botao->imagem, botao->x, botao->y, 0);
 		
 		seta->x = seta->x + velocidade;
 
-		if (seta->x <= 500) {
-			velocidade = 1;
+		if (seta->x <= 503) {
+			velocidade = 2;
 		}
 		if (seta->x >= 960) {
-			velocidade = -1;
+			velocidade = -2;
 		}
 
 		
 		al_flip_display();
 	}
-
-	
 
 	al_destroy_bitmap(seta->imagem);
 	al_destroy_bitmap(teste->imagem);

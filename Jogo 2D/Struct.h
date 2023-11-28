@@ -16,15 +16,38 @@ typedef struct obj { // <- obj recebe malloc
 
 } Objeto;
 
+typedef struct reagentes {
+	int x, y, largura, altura, wx, wy;
+	ALLEGRO_BITMAP* imagemEstante;
+	bool podeClicar;
+	bool naEstante;
 
-;
+}Reagente;
+
 typedef struct cenario {
 	ALLEGRO_BITMAP* fundo; // <- cenario recebe malloc
 	Objeto* cientista;// <- cada obj recebe malloc
-	Objeto* bicarbonato;
-	Objeto* vinagre;
+	Reagente* bicarbonato;
+	Reagente* bicarbonatoColher;
+	Reagente* acido;
+	Reagente* cDeCobre;
+	Reagente* acucar;
+	Reagente* agua;
+	Reagente* aluminio;
+	Reagente* comprimido;
+	Reagente* coranteG;
+	Reagente* coranteR;
+	Reagente* hidrogenio;
+	Reagente* luminol;
+	Reagente* macarico;
+	Reagente* oleo;
+	Reagente* potassio;
+	Reagente* recipiente;
+	Reagente* soda;
+	Reagente* vinagre;
 
 } Cenario;
+
 
 typedef struct progresso {
 	int proximaReacao;
