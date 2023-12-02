@@ -15,12 +15,13 @@ int mouseX;
 int mouseY;
 
 //temporizador para a animação
-int timer = 0;
+
+
 
 
 //Função central da fase
 int jogarAcidoCarbonico(ALLEGRO_DISPLAY* display, ALLEGRO_EVENT_QUEUE* filaDeEventos, Prog* progresso){
-	
+	int timer = 0;
 	//al_load nas imagnes
 	carregarImg(progresso);
 
@@ -251,7 +252,8 @@ int jogarAcidoCarbonico(ALLEGRO_DISPLAY* display, ALLEGRO_EVENT_QUEUE* filaDeEve
 
 				
 				
-else if (estado == acertou) {
+
+				else if (estado == acertou) {
 					//cliques nos botões em caso de acerto
 					if (mouseHover(mouseX, mouseY, btProx->x, btProx->y, btProx->largura, btProx->altura)) {
 

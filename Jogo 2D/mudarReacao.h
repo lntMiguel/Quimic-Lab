@@ -10,7 +10,10 @@
 #include "hajaLuz.h"
 #include "menu.h"
 #include "comoJogar.h"
-
+#include "camaleao.h"
+#include "lampada.h"
+#include "aurora.h"
+#include "serpente.h"
 #ifndef mudarReacao_H
 #define mudarReacao_H
 
@@ -34,6 +37,20 @@ void selecionaReacao(ALLEGRO_DISPLAY* display, ALLEGRO_EVENT_QUEUE* filaDeEvento
 		jogarHajaLuz(display, filaDeEventos, progresso);
 		return ;
 	
+	case 4:
+		jogarCamaleao(display, filaDeEventos, progresso);
+		return;
+
+	case 5:
+		jogarLampada(display, filaDeEventos, progresso);
+		return;
+	
+	case 6:
+		jogarAurora(display, filaDeEventos, progresso);
+		return;
+	case 7:
+		jogarSerpente(display, filaDeEventos, progresso);
+		return;
 	default:
 		break;
 	}

@@ -9,8 +9,9 @@
 #include "Jogo 2D/Struct.h"
 #include "Jogo 2D/mudarReacao.h"
 #include <allegro5/allegro_primitives.h>
-
-
+//Ajustar Acido carbonico: Elementos conseguem sair da estante no estado errou | tirar o else do clique no bicarbonato para garantir que o jogador perca
+// colocar nome dos ingredientes na mesa camaleao
+//redimensionar imagens lampada
 //variaveis globais
 
 int main() {
@@ -55,7 +56,7 @@ int main() {
 
 	Prog progresso;
 	
-	progresso.proximaReacao = 3;
+	progresso.proximaReacao = 7;
 	progresso.fimDeJogo = 0;
 	progresso.reacoes[0] = 0;
 	progresso.reacoes[1] = 0;

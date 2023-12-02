@@ -148,8 +148,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AcidoCarbonico.h" />
+    <ClInclude Include="aurora.h" />
+    <ClInclude Include="camaleao.h" />
     <ClInclude Include="comoJogar.h" />
+    <ClInclude Include="lampada.h" />
     <ClInclude Include="menu.h" />
+    <ClInclude Include="serpente.h" />
     <ClInclude Include="skillTest.h" />
     <ClInclude Include="hajaLuz.h" />
     <ClInclude Include="Funcoes.h" />
