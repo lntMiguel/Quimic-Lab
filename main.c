@@ -12,6 +12,7 @@
 //Ajustar Acido carbonico: Elementos conseguem sair da estante no estado errou | tirar o else do clique no bicarbonato para garantir que o jogador perca
 // colocar nome dos ingredientes na mesa camaleao
 //redimensionar imagens lampada
+// Colocar mais fundos
 //variaveis globais
 
 int main() {
@@ -56,7 +57,7 @@ int main() {
 
 	Prog progresso;
 	
-	progresso.proximaReacao = 7;
+	progresso.proximaReacao = 0;
 	progresso.fimDeJogo = 0;
 	progresso.reacoes[0] = 0;
 	progresso.reacoes[1] = 0;
@@ -68,15 +69,6 @@ int main() {
 
 	progresso.cenario = (Cenario*)malloc(sizeof(Cenario));
 	
-	progresso.cenario->cientista = (Objeto*)malloc(sizeof(Objeto));
-	progresso.cenario->cientista->imagem = al_load_bitmap("imagens/cientista.png");
-	progresso.cenario->cientista->altura = 200;
-	progresso.cenario->cientista->largura = 124;
-	progresso.cenario->cientista->wx = 0;
-	progresso.cenario->cientista->wy = 0;
-	progresso.cenario->cientista->x = 150;
-	progresso.cenario->cientista->y = 300;
-
 	progresso.cenario->bicarbonato = (Reagente*)malloc(sizeof(Reagente));
 	progresso.cenario->bicarbonato->imagemEstante = al_load_bitmap("imagens/bicarbonatoEstante.png");
 	progresso.cenario->bicarbonato->altura = 100;
@@ -264,8 +256,178 @@ int main() {
 	progresso.cenario->soda->podeClicar = true;
 	progresso.cenario->soda->naEstante = true;
 
-	progresso.cenario->fundo = al_load_bitmap("imagens/fundo.png");
+	progresso.cenario->recipiente = (Reagente*)malloc(sizeof(Reagente));
+	progresso.cenario->recipiente->imagemEstante = al_load_bitmap("imagens/recipiente.png");
+	progresso.cenario->recipiente->altura = 100;
+	progresso.cenario->recipiente->largura = 108;
+	progresso.cenario->recipiente->wx = 0;
+	progresso.cenario->recipiente->wy = 0;
+	progresso.cenario->recipiente->x = 1370;
+	progresso.cenario->recipiente->y = 340;
+	progresso.cenario->recipiente->podeClicar = true;
+	progresso.cenario->recipiente->naEstante = true;
 
+	progresso.cenario->becker = (Reagente*)malloc(sizeof(Reagente));
+	progresso.cenario->becker->imagemEstante = al_load_bitmap("imagens/sodaEstante.png");
+	progresso.cenario->becker->altura = 100;
+	progresso.cenario->becker->largura = 108;
+	progresso.cenario->becker->wx = 0;
+	progresso.cenario->becker->wy = 0;
+	progresso.cenario->becker->x = 1370;
+	progresso.cenario->becker->y = 340;
+	progresso.cenario->becker->podeClicar = true;
+	progresso.cenario->becker->naEstante = true;
+
+
+	progresso.cenario->lab = al_load_bitmap("imagens/fundo.png");
+	progresso.cenario->escritorio = al_load_bitmap("imagens/escritorio2.png");
+	progresso.cenario->menuFundo = al_load_bitmap("imagens/escritorio1.png");
+	progresso.cenario->cjFundo = al_load_bitmap("imagens/cjFundo.png");
+	
+
+	progresso.cenario->fase1 = (Fase1*)malloc(sizeof(Fase1));
+	progresso.cenario->fase1->ACestagio1 = al_load_bitmap("imagens/fase1/ACestagio1.png");
+	progresso.cenario->fase1->ACestagio2 = al_load_bitmap("imagens/fase1/ACestagio2.png");
+	progresso.cenario->fase1->ACestagio3 = al_load_bitmap("imagens/fase1/ACestagio3.png");
+	progresso.cenario->fase1->reciVinagre = al_load_bitmap("imagens/fase1/reciVinagre.png");
+	progresso.cenario->fase1->Vapor = al_load_bitmap("imagens/fase1/Vapor.png");
+	progresso.cenario->fase1->fala1 = al_load_bitmap("imagens/fase1/fase1H1.png");
+	progresso.cenario->fase1->fala2 = al_load_bitmap("imagens/fase1/fase1H2.png");
+	progresso.cenario->fase1->fala3 = al_load_bitmap("imagens/fase1/fase1H3.png");
+	progresso.cenario->fase1->vinagreMesa = al_load_bitmap("imagens/fase1/vinagre.png");
+	progresso.cenario->fase1->bicarbonatoMesa = al_load_bitmap("imagens/fase1/bicarbonato.png");
+
+	progresso.cenario->fase2 = (Fase2*)malloc(sizeof(Fase2));
+	progresso.cenario->fase2->lumiE1 = al_load_bitmap("imagens/fase2/lumiE1.png");
+	progresso.cenario->fase2->lumiE2 = al_load_bitmap("imagens/fase2/lumiE2.png");
+	progresso.cenario->fase2->luminolMesa = al_load_bitmap("imagens/fase2/lumiMesa.png");
+	progresso.cenario->fase2->recipienteLuminol = al_load_bitmap("imagens/fase2/reciLumi.png");
+	progresso.cenario->fase2->fundoEscuro = al_load_bitmap("imagens/fase2/fundoEscuro.png");
+	progresso.cenario->fase2->fala1 = al_load_bitmap("imagens/fase2/fase2H1.png");
+	progresso.cenario->fase2->fala2 = al_load_bitmap("imagens/fase2/fase2H2.png");
+	progresso.cenario->fase2->fala3 = al_load_bitmap("imagens/fase2/fase2H3.png");
+	progresso.cenario->fase2->hidrogenioMesa = al_load_bitmap("imagens/fase2/hidrogemioMesa.png");
+	progresso.cenario->fase2->aviso = al_load_bitmap("imagens/fase2/aviso.png");
+
+	progresso.cenario->fase2 = (Fase2*)malloc(sizeof(Fase2));
+	progresso.cenario->fase2->lumiE1 = al_load_bitmap("imagens/fase2/lumiE1.png");
+	progresso.cenario->fase2->lumiE2 = al_load_bitmap("imagens/fase2/lumiE2.png");
+	progresso.cenario->fase2->luminolMesa = al_load_bitmap("imagens/fase2/lumiMesa.png");
+	progresso.cenario->fase2->recipienteLuminol = al_load_bitmap("imagens/fase2/reciLumi.png");
+	progresso.cenario->fase2->fundoEscuro = al_load_bitmap("imagens/fase2/fundoEscuro.png");
+	progresso.cenario->fase2->fala1 = al_load_bitmap("imagens/fase2/fase2H1.png");
+	progresso.cenario->fase2->fala2 = al_load_bitmap("imagens/fase2/fase2H2.png");
+	progresso.cenario->fase2->fala3 = al_load_bitmap("imagens/fase2/fase2H3.png");
+	progresso.cenario->fase2->hidrogenioMesa = al_load_bitmap("imagens/fase2/hidrogemioMesa.png");
+	progresso.cenario->fase2->aviso = al_load_bitmap("imagens/fase2/aviso.png");
+
+	progresso.cenario->fase3 = (Fase3*)malloc(sizeof(Fase3));
+	progresso.cenario->fase3->acucarMesa = al_load_bitmap("imagens/fase3/acucarMesa.png");
+	progresso.cenario->fase3->aguaMesa = al_load_bitmap("imagens/fase3/aguaMesa.png");
+	progresso.cenario->fase3->sodaMesa = al_load_bitmap("imagens/fase3/sodaMesa.png");
+	progresso.cenario->fase3->beckerAguaSoda = al_load_bitmap("imagens/fase3/beckerAguaSoda.png");
+	progresso.cenario->fase3->beckerAguaPotassio = al_load_bitmap("imagens/fase3/beckerAguaPotassio.png");
+	progresso.cenario->fase3->fala1 = al_load_bitmap("imagens/fase3/fase2H1.png");
+	progresso.cenario->fase3->fala2 = al_load_bitmap("imagens/fase3/fase2H2.png");
+	progresso.cenario->fase3->fala3 = al_load_bitmap("imagens/fase3/fase2H3.png");
+	progresso.cenario->fase3->beckerAguaSodaAcucar = al_load_bitmap("imagens/fase3/beckerAguaSodaAcucar.png");
+	progresso.cenario->fase3->recipienteMisturado = al_load_bitmap("imagens/fase3/recipienteMisturado.png");
+	progresso.cenario->fase3->recipienteRoxo = al_load_bitmap("imagens/fase3/recipienteRoxo.png");
+	progresso.cenario->fase3->recipienteLaranja = al_load_bitmap("imagens/fase3/recipienteLaranja.png");
+	progresso.cenario->fase3->recipienteVerde = al_load_bitmap("imagens/fase3/recipienteVerde.png");
+	progresso.cenario->fase3->fala4= al_load_bitmap("imagens/fase3/fase2H4.png");
+	progresso.cenario->fase3->potassioMesa = al_load_bitmap("imagens/fase3/potassioMesa.png");
+
+	progresso.cenario->fase4 = (Fase4*)malloc(sizeof(Fase4));
+	progresso.cenario->fase4->coranteGMesa = al_load_bitmap("imagens/fase4/coranteGMesa.png");
+	progresso.cenario->fase4->coranteRMesa = al_load_bitmap("imagens/fase4/coranteRMesa.png");
+	progresso.cenario->fase4->aguaMesa = al_load_bitmap("imagens/fase4/aguaMesa.png");
+	progresso.cenario->fase4->aguaG = al_load_bitmap("imagens/fase4/aguaG.png");
+	progresso.cenario->fase4->aguaR= al_load_bitmap("imagens/fase4/aguaR.png");
+	progresso.cenario->fase4->fala1 = al_load_bitmap("imagens/fase4/fase4H1.png");
+	progresso.cenario->fase4->fala2 = al_load_bitmap("imagens/fase4/fase4H2.png");
+	progresso.cenario->fase4->fala3 = al_load_bitmap("imagens/fase4/fase4H3.png");
+	progresso.cenario->fase4->oleoMesa = al_load_bitmap("imagens/fase4/oleoMesa.png");
+	progresso.cenario->fase4->reciAguaOleoG= al_load_bitmap("imagens/fase4/reciAguaOleoG.png");
+	progresso.cenario->fase4->reciAguaOleoR = al_load_bitmap("imagens/fase4/reciAguaOleoR.png");
+	progresso.cenario->fase4->reciAguaG = al_load_bitmap("imagens/fase4/reciAguaG.png");
+	progresso.cenario->fase4->reciAguaR = al_load_bitmap("imagens/fase4/reciAguaR.png");
+	progresso.cenario->fase4->lampadaG1 = al_load_bitmap("imagens/fase4/lampadaG1.png");
+	progresso.cenario->fase4->lampadaG2 = al_load_bitmap("imagens/fase4/lampadaG2.png");
+	progresso.cenario->fase4->lampadaR1 = al_load_bitmap("imagens/fase4/lampadaR1.png");
+	progresso.cenario->fase4->lampadaR2 = al_load_bitmap("imagens/fase4/lampadaR2.png");
+	progresso.cenario->fase4->comprimidoMesa = al_load_bitmap("imagens/fase4/comprimidoMesa.png");
+
+	progresso.cenario->fase5 = (Fase5*)malloc(sizeof(Fase5));
+	progresso.cenario->fase5->acidoMesa = al_load_bitmap("imagens/fase5/acidoMesa.png");
+	progresso.cenario->fase5->papelAlum = al_load_bitmap("imagens/fase5/papelAlum.png");
+	progresso.cenario->fase5->macaricoMesa = al_load_bitmap("imagens/fase5/macaricoMesa.png");
+	progresso.cenario->fase5->cDeCobreMesa = al_load_bitmap("imagens/fase5/cDeCobreMesa.png");
+	progresso.cenario->fase5->reciAcidoCobre = al_load_bitmap("imagens/fase5/reciAcidoCobre.png");
+	progresso.cenario->fase5->reciACA = al_load_bitmap("imagens/fase5/reciACA.png");
+	progresso.cenario->fase5->reciAcido = al_load_bitmap("imagens/fase5/reciAcido.png");
+	progresso.cenario->fase5->aurora1 = al_load_bitmap("imagens/fase5/aurora1.png");
+	progresso.cenario->fase5->aurora2 = al_load_bitmap("imagens/fase5/aurora2.png");
+	progresso.cenario->fase5->aurora3 = al_load_bitmap("imagens/fase5/aurora3.png");
+	progresso.cenario->fase5->aviso = al_load_bitmap("imagens/fase5/aviso.png");
+	progresso.cenario->fase5->fundoEscuro = al_load_bitmap("imagens/fase5/fundoEscuro.png");
+	progresso.cenario->fase5->fala1= al_load_bitmap("imagens/fase5/fase5H1.png");
+	progresso.cenario->fase5->fala2 = al_load_bitmap("imagens/fase5/fase5H2.png");
+	progresso.cenario->fase5->fala3 = al_load_bitmap("imagens/fase5/fase5H3.png");
+
+	progresso.cenario->fase6 = (Fase6*)malloc(sizeof(Fase6));
+	progresso.cenario->fase6->acucarMesa = al_load_bitmap("imagens/fas6/acucarMesa.png");
+	progresso.cenario->fase6->bicarbonatoMesa = al_load_bitmap("imagens/fase6/bicarbonato.png");
+	progresso.cenario->fase6->macaricoMesa = al_load_bitmap("imagens/fase6/macaricoMesa.png");
+	progresso.cenario->fase6->bandeja = al_load_bitmap("imagens/fase6/bandeja.png");
+	progresso.cenario->fase6->bandejaCubos = al_load_bitmap("imagens/fase6/bandejaCubos.png");
+	progresso.cenario->fase6->serpente1 = al_load_bitmap("imagens/fase6/serpente1.png");
+	progresso.cenario->fase6->serpente2 = al_load_bitmap("imagens/fase6/serpente2.png");
+	progresso.cenario->fase6->serpente3 = al_load_bitmap("imagens/fase6/serpente3.png");
+	progresso.cenario->fase6->serpente4 = al_load_bitmap("imagens/fase6/serpente4.png");
+	progresso.cenario->fase6->serpente5 = al_load_bitmap("imagens/fase6/serpente5.png");
+	progresso.cenario->fase6->serpente6 = al_load_bitmap("imagens/fase6/serpente6.png");
+	progresso.cenario->fase6->serpente7 = al_load_bitmap("imagens/fase6/serpente7.png");
+	progresso.cenario->fase6->fala1 = al_load_bitmap("imagens/fase6/fase6H1.png");
+	progresso.cenario->fase6->fala2 = al_load_bitmap("imagens/fase6/fase6H2.png");
+	progresso.cenario->fase6->fala3 = al_load_bitmap("imagens/fase6/fase6H3.png");
+	progresso.cenario->fase6->serpente8 = al_load_bitmap("imagens/fase6/serpente8.png");
+	progresso.cenario->fase6->cubos = al_load_bitmap("imagens/fase6/cubos.png");
+
+	progresso.cenario->btMenu = (Botao*)malloc(sizeof(Botao));
+	progresso.cenario->btMenu->altura = 98;
+	progresso.cenario->btMenu->largura = 310;
+	progresso.cenario->btMenu->desenho = NULL;
+	progresso.cenario->btMenu->norm = al_load_bitmap("imagens/btMenu.png");
+	progresso.cenario->btMenu->hover = al_load_bitmap("imagens/btMenuH.png");
+	progresso.cenario->btMenu->wx = 0;
+	progresso.cenario->btMenu->wy = 0;
+	progresso.cenario->btMenu->x = 1010;
+	progresso.cenario->btMenu->y = 720;
+	
+	progresso.cenario->btProx = (Botao*)malloc(sizeof(Botao));
+	progresso.cenario->btProx->altura = 98;
+	progresso.cenario->btProx->largura = 310;
+	progresso.cenario->btProx->desenho = NULL;
+	progresso.cenario->btProx->norm = al_load_bitmap("imagens/btProx.png");
+	progresso.cenario->btProx->hover = al_load_bitmap("imagens/btProxH.png");
+	progresso.cenario->btProx->wx = 0;
+	progresso.cenario->btProx->wy = 0;
+	progresso.cenario->btProx->x = 1010;
+	progresso.cenario->btProx->y = 480;
+
+	progresso.cenario->btReset = (Botao*)malloc(sizeof(Botao));
+	progresso.cenario->btReset->altura = 98;
+	progresso.cenario->btReset->largura = 310;
+	progresso.cenario->btReset->desenho = NULL;
+	progresso.cenario->btReset->norm = al_load_bitmap("imagens/btReset.png");
+	progresso.cenario->btReset->hover = al_load_bitmap("imagens/btResetH.png");
+	progresso.cenario->btReset->wx = 0;
+	progresso.cenario->btReset->wy = 0;
+	progresso.cenario->btReset->x = 1010;
+	progresso.cenario->btReset->y = 600;
+
+	progresso.cenario->font = al_load_ttf_font("fontes/fonte2.ttf", 20, 0);
 	Prog* prog = &progresso;
 
 	while (!prog->fimDeJogo) {

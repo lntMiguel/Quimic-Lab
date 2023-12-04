@@ -24,8 +24,6 @@ int comoJogar(ALLEGRO_DISPLAY* display, ALLEGRO_EVENT_QUEUE* filaDeEventos, Prog
 
 	Objeto* btVoltar;
 
-	progresso->cenario->fundo = al_load_bitmap("imagens/cjFundo.png");
-
 	btVoltar = (Objeto*)malloc(sizeof(Objeto));
 	btVoltar->altura = 98;
 	btVoltar->largura = 310;
@@ -77,7 +75,7 @@ int comoJogar(ALLEGRO_DISPLAY* display, ALLEGRO_EVENT_QUEUE* filaDeEventos, Prog
 				btVoltar->imagem = btVoltarN;
 			}
 			
-			al_draw_bitmap(progresso->cenario->fundo, 0, 0, 0);
+			al_draw_bitmap(progresso->cenario->cjFundo, 0, 0, 0);
 			al_draw_bitmap(btVoltar->imagem, btVoltar->x, btVoltar->y, 0);
 			
 			al_flip_display();
@@ -88,7 +86,7 @@ int comoJogar(ALLEGRO_DISPLAY* display, ALLEGRO_EVENT_QUEUE* filaDeEventos, Prog
 	al_destroy_bitmap(btVoltarH);
 	al_destroy_bitmap(btVoltarN);
 	free(btVoltar);
-	al_destroy_bitmap(progresso->cenario->fundo);
+	
 	return 0;
 	
 }

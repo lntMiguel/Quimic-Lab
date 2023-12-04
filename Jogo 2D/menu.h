@@ -31,7 +31,6 @@ int jogarMenu(ALLEGRO_DISPLAY* display, ALLEGRO_EVENT_QUEUE* filaDeEventos, Prog
 
 	Objeto* btJogar, * btCJ, * btSair;
 
-	progresso->cenario->fundo = al_load_bitmap("imagens/escritorio1.png");
 
 	btJogar = (Objeto*)malloc(sizeof(Objeto));
 	btJogar->altura = 98;
@@ -131,7 +130,7 @@ int jogarMenu(ALLEGRO_DISPLAY* display, ALLEGRO_EVENT_QUEUE* filaDeEventos, Prog
 		}
 		
 			
-		al_draw_bitmap(progresso->cenario->fundo, 0, 0, 0);
+		al_draw_bitmap(progresso->cenario->menuFundo, 0, 0, 0);
 		al_draw_bitmap(logo, 350, 100, 0);
 		al_draw_bitmap(btJogar->imagem, btJogar->x, btJogar->y, 0);
 		al_draw_bitmap(btCJ->imagem, btCJ->x, btCJ->y, 0);
@@ -141,7 +140,6 @@ int jogarMenu(ALLEGRO_DISPLAY* display, ALLEGRO_EVENT_QUEUE* filaDeEventos, Prog
 	}
 	
 	al_destroy_bitmap(logo);
-	al_destroy_bitmap(progresso->cenario->fundo);
 	al_destroy_bitmap(btJogarH);
 	al_destroy_bitmap(btCJH);
 	al_destroy_bitmap(btSairH);

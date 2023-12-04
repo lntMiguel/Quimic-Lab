@@ -218,7 +218,7 @@ void liberearCliques(Prog* progresso) {
 }
 
 void carregarImg(Prog* progresso) {
-	progresso->cenario->cientista->imagem = al_load_bitmap("imagens/cientista.png");
+	
 	progresso->cenario->bicarbonato->imagemEstante = al_load_bitmap("imagens/bicarbonatoEstante.png");
 	progresso->cenario->vinagre->imagemEstante = al_load_bitmap("imagens/vinagreEstante.png");
 	progresso->cenario->bicarbonatoColher->imagemEstante = al_load_bitmap("imagens/bicarbonatoEstante.png");
@@ -236,6 +236,5 @@ void carregarImg(Prog* progresso) {
 	progresso->cenario->oleo->imagemEstante = al_load_bitmap("imagens/oleoEstante.png");
 	progresso->cenario->potassio->imagemEstante = al_load_bitmap("imagens/potassioEstante.png");
 	progresso->cenario->soda->imagemEstante = al_load_bitmap("imagens/sodaEstante.png");
-	progresso->cenario->fundo = al_load_bitmap("imagens/fundo.png");
 }
 #endif

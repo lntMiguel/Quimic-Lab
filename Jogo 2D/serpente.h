@@ -17,82 +17,15 @@
 int mouseX;
 int mouseY;
 
-//temporizador para a animação
 
 //Função central da fase
 int jogarSerpente(ALLEGRO_DISPLAY* display, ALLEGRO_EVENT_QUEUE* filaDeEventos, Prog* progresso) {
 	int timer = 0;
-	//al_load nas imagnes
-	carregarImg(progresso);
-
+	
 	//liberando cliques nas imagens
 	liberearCliques(progresso);
 
-	//mudando o fundo
-	progresso->cenario->fundo = al_load_bitmap("imagens/fundo.png");
-
-	//fonte
-	ALLEGRO_FONT* font;
-
-	//load em bitmaps especificos desta fase 
-	ALLEGRO_BITMAP* acucarMesa = al_load_bitmap("imagens/acucarMesa.png");
-	ALLEGRO_BITMAP* bicarboMesa = al_load_bitmap("imagens/bicarbonato.png");
-	ALLEGRO_BITMAP* bandeja = al_load_bitmap("imagens/bandeja.png");
-	ALLEGRO_BITMAP* bandejaCubos = al_load_bitmap("imagens/bandejaCubos.png");
-	ALLEGRO_BITMAP* macaricoMesa = al_load_bitmap("imagens/macaricoMesa.png");
-	ALLEGRO_BITMAP* serpente1 = al_load_bitmap("imagens/serpente1.png");
-	ALLEGRO_BITMAP* serpente2 = al_load_bitmap("imagens/serpente2.png");
-	ALLEGRO_BITMAP* serpente3 = al_load_bitmap("imagens/serpente3.png");
-	ALLEGRO_BITMAP* serpente4 = al_load_bitmap("imagens/serpente4.png");
-	ALLEGRO_BITMAP* serpente5 = al_load_bitmap("imagens/serpente5.png");
-	ALLEGRO_BITMAP* serpente6 = al_load_bitmap("imagens/serpente6.png");
-	ALLEGRO_BITMAP* serpente7 = al_load_bitmap("imagens/serpente7.png");
-	ALLEGRO_BITMAP* serpente8 = al_load_bitmap("imagens/serpente8.png");
-	ALLEGRO_BITMAP* cubos = al_load_bitmap("imagens/cubos.png");
-	ALLEGRO_BITMAP* btProxN = al_load_bitmap("imagens/btProx.png");
-	ALLEGRO_BITMAP* btProxH = al_load_bitmap("imagens/btProxH.png");
-	ALLEGRO_BITMAP* btResetN = al_load_bitmap("imagens/btReset.png");
-	ALLEGRO_BITMAP* btResetH = al_load_bitmap("imagens/btResetH.png");
-	ALLEGRO_BITMAP* btMenuN = al_load_bitmap("imagens/btMenu.png");
-	ALLEGRO_BITMAP* btMenuH = al_load_bitmap("imagens/btMenuH.png");
-	ALLEGRO_BITMAP* escritorio = al_load_bitmap("imagens/escritorio2.png");
-	ALLEGRO_BITMAP* fala1 = al_load_bitmap("imagens/fase6H1.png");
-	ALLEGRO_BITMAP* fala2 = al_load_bitmap("imagens/fase6H2.png");
-	ALLEGRO_BITMAP* fala3 = al_load_bitmap("imagens/fase6H3.png");
-	ALLEGRO_BITMAP* dialogo = fala1;
-
-	//botoes se errou e acertou
-	Objeto* btProx, * btReset, * btMenu;
-
-	btProx = (Objeto*)malloc(sizeof(Objeto));
-	btProx->altura = 98;
-	btProx->largura = 310;
-	btProx->imagem = btProxN;
-	btProx->wx = 0;
-	btProx->wy = 0;
-	btProx->x = 1010;
-	btProx->y = 480;
-
-	btReset = (Objeto*)malloc(sizeof(Objeto));
-	btReset->altura = 98;
-	btReset->largura = 310;
-	btReset->imagem = btResetN;
-	btReset->wx = 0;
-	btReset->wy = 0;
-	btReset->x = 1010;
-	btReset->y = 600;
-
-	btMenu = (Objeto*)malloc(sizeof(Objeto));
-	btMenu->altura = 98;
-	btMenu->largura = 310;
-	btMenu->imagem = btMenuN;
-	btMenu->wx = 0;
-	btMenu->wy = 0;
-	btMenu->x = 1010;
-	btMenu->y = 720;
-
-	//load na fonte
-	font = al_load_ttf_font("fontes/fonte2.ttf", 20, 0);
+	ALLEGRO_BITMAP* dialogo = NULL;
 
 	//variaveis de controle
 	bool sair = false;
@@ -110,7 +43,7 @@ int jogarSerpente(ALLEGRO_DISPLAY* display, ALLEGRO_EVENT_QUEUE* filaDeEventos, 
 
 	};
 
-	enum Estados estado = clicouBandeja;
+	enum Estados estado = inicio;
 
 	//looping principal
 	while (!sair) {
@@ -274,19 +207,19 @@ int jogarSerpente(ALLEGRO_DISPLAY* display, ALLEGRO_EVENT_QUEUE* filaDeEventos, 
 
 			else if (estado == acertou) {
 				//cliques nos botões em caso de acerto
-				if (mouseHover(mouseX, mouseY, btProx->x, btProx->y, btProx->largura, btProx->altura)) {
+				if (mouseHover(mouseX, mouseY, progresso->cenario->btProx->x, progresso->cenario->btProx->y, progresso->cenario->btProx->largura, progresso->cenario->btProx->altura)) {
 
 					sair = true;
-					progresso->proximaReacao = 7;
+					progresso->proximaReacao = 8;
 				}
 
-				if (mouseHover(mouseX, mouseY, btReset->x, btReset->y, btReset->largura, btReset->altura)) {
+				if (mouseHover(mouseX, mouseY, progresso->cenario->btReset->x, progresso->cenario->btReset->y, progresso->cenario->btReset->largura, progresso->cenario->btReset->altura)) {
 					progresso->proximaReacao = 7;
 					sair = true;
 
 				}
 
-				if (mouseHover(mouseX, mouseY, btMenu->x, btMenu->y, btMenu->largura, btMenu->altura)) {
+				if (mouseHover(mouseX, mouseY, progresso->cenario->btMenu->x, progresso->cenario->btMenu->y, progresso->cenario->btMenu->largura, progresso->cenario->btMenu->altura)) {
 					sair = true;
 					progresso->proximaReacao = 0;
 				}
@@ -294,12 +227,12 @@ int jogarSerpente(ALLEGRO_DISPLAY* display, ALLEGRO_EVENT_QUEUE* filaDeEventos, 
 
 			else if (estado == errou) {
 				//cliques nos botões em caso de erro
-				if (mouseHover(mouseX, mouseY, btReset->x, btReset->y, btReset->largura, btReset->altura)) {
+				if (mouseHover(mouseX, mouseY, progresso->cenario->btReset->x, progresso->cenario->btReset->y, progresso->cenario->btReset->largura, progresso->cenario->btReset->altura)) {
 					sair = true;
 					progresso->proximaReacao = 7;
 				}
 
-				if (mouseHover(mouseX, mouseY, btMenu->x, btMenu->y, btMenu->largura, btMenu->altura)) {
+				if (mouseHover(mouseX, mouseY, progresso->cenario->btMenu->x, progresso->cenario->btMenu->y, progresso->cenario->btMenu->largura, progresso->cenario->btMenu->altura)) {
 					sair = true;
 					progresso->proximaReacao = 0;
 				}
@@ -307,45 +240,22 @@ int jogarSerpente(ALLEGRO_DISPLAY* display, ALLEGRO_EVENT_QUEUE* filaDeEventos, 
 
 		}
 
-		//mudando imagem do botão quando o mouse passar em cima
-		if (estado == acertou || estado == errou)
-
-			if (mouseHover(mouseX, mouseY, btProx->x, btProx->y, btProx->largura, btProx->altura))
-				btProx->imagem = btProxH;
-
-			else
-				btProx->imagem = btProxN;
-
-		if (mouseHover(mouseX, mouseY, btReset->x, btReset->y, btReset->largura, btReset->altura))
-			btReset->imagem = btResetH;
-
-		else
-			btReset->imagem = btResetN;
-
-		if (mouseHover(mouseX, mouseY, btMenu->x, btMenu->y, btMenu->largura, btMenu->altura))
-			btMenu->imagem = btMenuH;
-
-
-		else
-			btMenu->imagem = btMenuN;
-
-
 		//desenhos da historia
 		if (estado == historia) {
 
 			if (hist == 1)
-				dialogo = fala1;
+				dialogo = progresso->cenario->fase6->fala1;
 
 
 			else if (hist == 2)
-				dialogo = fala2;
+				dialogo = progresso->cenario->fase6->fala2;
 
 
 			else if (hist == 3)
-				dialogo = fala3;
+				dialogo = progresso->cenario->fase6->fala3;
 
 
-			al_draw_bitmap(escritorio, 0, 0, 0);
+			al_draw_bitmap(progresso->cenario->escritorio, 0, 0, 0);
 			al_draw_bitmap(dialogo, 0, 0, 0);
 
 		}
@@ -353,80 +263,106 @@ int jogarSerpente(ALLEGRO_DISPLAY* display, ALLEGRO_EVENT_QUEUE* filaDeEventos, 
 		//desenhos da fase em geral
 		else {
 			al_clear_to_color(al_map_rgb(255, 255, 255));
-			al_draw_bitmap(progresso->cenario->fundo, 0, 0, 0);
+			al_draw_bitmap(progresso->cenario->lab, 0, 0, 0);
 			desenhaRegentes(progresso);
-			desenharTextos(progresso, font, mouseX, mouseY);
+			desenharTextos(progresso, progresso->cenario->font, mouseX, mouseY);
 
 
 			if (progresso->cenario->acucar->naEstante == false)
-				al_draw_bitmap(acucarMesa, 1100, 470, 0);
+				al_draw_bitmap(progresso->cenario->fase6->acucarMesa, 1100, 470, 0);
 
 			if (progresso->cenario->bicarbonato->naEstante == false)
-				al_draw_bitmap(bicarboMesa, 400, 470, 0);
+				al_draw_bitmap(progresso->cenario->fase6->bicarbonatoMesa, 400, 470, 0);
 
 			if (progresso->cenario->macarico->naEstante == false)
-				al_draw_bitmap(macaricoMesa, 80, 430, 0);
+				al_draw_bitmap(progresso->cenario->fase6->macaricoMesa, 80, 430, 0);
 
 
 			//switch case do estado para controlar os desenhos
 			switch (estado) {
 
 			case inicio:
-				al_draw_bitmap(bandeja, 600, 500, 0);
+				al_draw_bitmap(progresso->cenario->fase6->bandeja, 600, 500, 0);
 				break;
 
 			case fezCubos:
-				al_draw_bitmap(cubos, 900, 470, 0);
-				al_draw_bitmap(bandeja, 600, 500, 0);
+				al_draw_bitmap(progresso->cenario->fase6->cubos, 900, 470, 0);
+				al_draw_bitmap(progresso->cenario->fase6->bandeja, 600, 500, 0);
 				break;
 
 			case clicouBandeja:
-				al_draw_bitmap(bandejaCubos, 600, 500, 0);
+				al_draw_bitmap(progresso->cenario->fase6->bandejaCubos, 600, 500, 0);
 				break;
 
 			case clicouFogo:
 				timer++;
 				if (timer >= 0 && timer <= 60) 
-					al_draw_bitmap(serpente1, 600, 357, 0);
+					al_draw_bitmap(progresso->cenario->fase6->serpente1, 600, 357, 0);
 
-				else if(timer >= 0 && timer <= 60)
-					al_draw_bitmap(serpente2, 600, 250, 0);
-				
-				else if (timer >= 60 && timer <= 120)
-					al_draw_bitmap(serpente3, 600, 450, 0);
+				else if(timer >= 60 && timer <= 120)
+					al_draw_bitmap(progresso->cenario->fase6->serpente2, 600, 357, 0);
 				
 				else if (timer >= 120 && timer <= 180)
-					al_draw_bitmap(serpente4, 600, 425, 0);
-
+					al_draw_bitmap(progresso->cenario->fase6->serpente3, 600, 360, 0);
+				
 				else if (timer >= 180 && timer <= 240)
-					al_draw_bitmap(serpente5, 600, 450, 0);
+					al_draw_bitmap(progresso->cenario->fase6->serpente4, 600, 357, 0);
 
 				else if (timer >= 240 && timer <= 300)
-					al_draw_bitmap(serpente6, 600, 425, 0);
+					al_draw_bitmap(progresso->cenario->fase6->serpente5, 600, 362, 0);
 
 				else if (timer >= 300 && timer <= 360)
-					al_draw_bitmap(serpente7, 600, 450, 0);
+					al_draw_bitmap(progresso->cenario->fase6->serpente6, 600, 361, 0);
 
-				else if (timer >= 360 && timer <= 420) {
-					al_draw_bitmap(serpente8, 600, 425, 0);
+				else if (timer >= 360 && timer <= 420)
+					al_draw_bitmap(progresso->cenario->fase6->serpente7, 600, 366, 0);
+
+				else if (timer >= 420 && timer <= 480) {
+					al_draw_bitmap(progresso->cenario->fase6->serpente8, 600, 464, 0);
+					 
+				}
+				else if (timer >= 480) {
+					al_draw_bitmap(progresso->cenario->fase6->serpente8, 600, 464, 0);
 					estado = acertou;
 				}
-				
 				break;
 
 
 			case acertou:
-				al_draw_bitmap(serpente8, 600, 500, 0);
+				al_draw_bitmap(progresso->cenario->fase6->serpente8, 600, 464, 0);
 				bloquearCliques(progresso);
-				al_draw_bitmap(btProx->imagem, btProx->x, btProx->y, 0);
-				al_draw_bitmap(btReset->imagem, btReset->x, btReset->y, 0);
-				al_draw_bitmap(btMenu->imagem, btMenu->x, btMenu->y, 0);
+				if (mouseHover(mouseX, mouseY, progresso->cenario->btProx->x, progresso->cenario->btProx->y, progresso->cenario->btProx->largura, progresso->cenario->btProx->altura))
+					al_draw_bitmap(progresso->cenario->btProx->hover, progresso->cenario->btProx->x, progresso->cenario->btProx->y, 0);
+
+				else
+					al_draw_bitmap(progresso->cenario->btProx->norm, progresso->cenario->btProx->x, progresso->cenario->btProx->y, 0);
+
+				if (mouseHover(mouseX, mouseY, progresso->cenario->btReset->x, progresso->cenario->btReset->y, progresso->cenario->btReset->largura, progresso->cenario->btReset->altura))
+					al_draw_bitmap(progresso->cenario->btReset->hover, progresso->cenario->btReset->x, progresso->cenario->btReset->y, 0);
+
+				else
+					al_draw_bitmap(progresso->cenario->btReset->norm, progresso->cenario->btReset->x, progresso->cenario->btReset->y, 0);
+
+				if (mouseHover(mouseX, mouseY, progresso->cenario->btMenu->x, progresso->cenario->btMenu->y, progresso->cenario->btMenu->largura, progresso->cenario->btMenu->altura))
+					al_draw_bitmap(progresso->cenario->btMenu->hover, progresso->cenario->btMenu->x, progresso->cenario->btMenu->y, 0);
+
+				else
+					al_draw_bitmap(progresso->cenario->btMenu->norm, progresso->cenario->btMenu->x, progresso->cenario->btMenu->y, 0);
 				break;
 
 			case errou:
 				bloquearCliques(progresso);
-				al_draw_bitmap(btReset->imagem, btReset->x, btReset->y, 0);
-				al_draw_bitmap(btMenu->imagem, btMenu->x, btMenu->y, 0);
+				if (mouseHover(mouseX, mouseY, progresso->cenario->btReset->x, progresso->cenario->btReset->y, progresso->cenario->btReset->largura, progresso->cenario->btReset->altura))
+					al_draw_bitmap(progresso->cenario->btReset->hover, progresso->cenario->btReset->x, progresso->cenario->btReset->y, 0);
+
+				else
+					al_draw_bitmap(progresso->cenario->btReset->norm, progresso->cenario->btReset->x, progresso->cenario->btReset->y, 0);
+
+				if (mouseHover(mouseX, mouseY, progresso->cenario->btMenu->x, progresso->cenario->btMenu->y, progresso->cenario->btMenu->largura, progresso->cenario->btMenu->altura))
+					al_draw_bitmap(progresso->cenario->btMenu->hover, progresso->cenario->btMenu->x, progresso->cenario->btMenu->y, 0);
+
+				else
+					al_draw_bitmap(progresso->cenario->btMenu->norm, progresso->cenario->btMenu->x, progresso->cenario->btMenu->y, 0);
 				break;
 			}
 
@@ -463,32 +399,6 @@ int jogarSerpente(ALLEGRO_DISPLAY* display, ALLEGRO_EVENT_QUEUE* filaDeEventos, 
 	progresso->cenario->bicarbonato->naEstante = true;
 	progresso->cenario->acucar->naEstante = true;
 	progresso->cenario->macarico->naEstante = true;
-
-
-	//destruindo imagens 
-	al_destroy_bitmap(progresso->cenario->fundo);
-	destruirBitmaps(progresso);
-	//al_destroy_bitmap(vinagreMesa);
-	//al_destroy_bitmap(bicarbonatoMesa);
-	//al_destroy_bitmap(recipienteVinagre);
-
-	//al_destroy_bitmap(recipienteFeito3);
-	//al_destroy_bitmap(vapor);
-	al_destroy_bitmap(btProxH);
-	al_destroy_bitmap(btProxN);
-	al_destroy_bitmap(btMenuH);
-	al_destroy_bitmap(btMenuN);
-	al_destroy_bitmap(btResetH);
-	al_destroy_bitmap(btResetN);
-	al_destroy_bitmap(fala1);
-	al_destroy_bitmap(fala2);
-	al_destroy_bitmap(fala3);
-
-	al_destroy_font(font);
-
-	free(btMenu);
-	free(btProx);
-	free(btReset);
 
 	return 0;
 }

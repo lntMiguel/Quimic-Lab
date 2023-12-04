@@ -14,89 +14,18 @@
 int mouseX;
 int mouseY;
 
-//temporizador para a animação
-
 //Função central da fase
 int jogarLampada(ALLEGRO_DISPLAY* display, ALLEGRO_EVENT_QUEUE* filaDeEventos, Prog* progresso) {
+	//temporizador para a animação
 	int timer = 0;
-	//al_load nas imagnes
-	carregarImg(progresso);
-
+	
 	//liberando cliques nas imagens
 	liberearCliques(progresso);
 
-	//mudando o fundo
-	progresso->cenario->fundo = al_load_bitmap("imagens/fundo.png");
-
-	//fonte
-	ALLEGRO_FONT* font;
-
-	//load em bitmaps especificos desta fase 
-	ALLEGRO_BITMAP* becker = al_load_bitmap("imagens/beckerMesa.png");
-	ALLEGRO_BITMAP* coranteGMesa = al_load_bitmap("imagens/coranteGMesa.png");
-	ALLEGRO_BITMAP* coranteRMesa = al_load_bitmap("imagens/coranteRMesa.png");
-	ALLEGRO_BITMAP* aguaMesa = al_load_bitmap("imagens/aguaMesa.png");
-	ALLEGRO_BITMAP* recipiente = al_load_bitmap("imagens/recipiente.png");
-	ALLEGRO_BITMAP* aguaG = al_load_bitmap("imagens/aguaG.png");
-	ALLEGRO_BITMAP* aguaR = al_load_bitmap("imagens/aguaR.png");
-	ALLEGRO_BITMAP* oleoMesa = al_load_bitmap("imagens/oleoMesa.png");
-	ALLEGRO_BITMAP* reciAguaOleoG = al_load_bitmap("imagens/reciAguaOleoG.png");
-	ALLEGRO_BITMAP* reciAguaOleoR = al_load_bitmap("imagens/reciAguaOleoR.png");
-	ALLEGRO_BITMAP* reciAguaG = al_load_bitmap("imagens/reciAguaG.png");
-	ALLEGRO_BITMAP* reciAguaR = al_load_bitmap("imagens/reciAguaR.png");
-	ALLEGRO_BITMAP* lampadaG1 = al_load_bitmap("imagens/lampadaG1.png");
-	ALLEGRO_BITMAP* lampadaG2 = al_load_bitmap("imagens/lampadaG2.png");
-	ALLEGRO_BITMAP* lampadaR1 = al_load_bitmap("imagens/lampadaR1.png");
-	ALLEGRO_BITMAP* lampadaR2 = al_load_bitmap("imagens/lampadaR2.png");
-	ALLEGRO_BITMAP* comprimidoMesa = al_load_bitmap("imagens/comprimidoMesa.png");
-	ALLEGRO_BITMAP* btProxN = al_load_bitmap("imagens/btProx.png");
-	ALLEGRO_BITMAP* btProxH = al_load_bitmap("imagens/btProxH.png");
-	ALLEGRO_BITMAP* btResetN = al_load_bitmap("imagens/btReset.png");
-	ALLEGRO_BITMAP* btResetH = al_load_bitmap("imagens/btResetH.png");
-	ALLEGRO_BITMAP* btMenuN = al_load_bitmap("imagens/btMenu.png");
-	ALLEGRO_BITMAP* btMenuH = al_load_bitmap("imagens/btMenuH.png");
-	ALLEGRO_BITMAP* escritorio = al_load_bitmap("imagens/escritorio2.png");
-	ALLEGRO_BITMAP* fala1 = al_load_bitmap("imagens/fase4H1.png");
-	ALLEGRO_BITMAP* fala2 = al_load_bitmap("imagens/fase4H2.png");
-	ALLEGRO_BITMAP* fala3 = al_load_bitmap("imagens/fase4H3.png");
-	ALLEGRO_BITMAP* dialogo = fala1;
+	ALLEGRO_BITMAP* dialogo = NULL;
 	ALLEGRO_BITMAP* reciFinal = NULL;
 	ALLEGRO_BITMAP* reciFinal2 = NULL;
 	
-
-	//botoes se errou e acertou
-	Objeto* btProx, * btReset, * btMenu;
-
-	btProx = (Objeto*)malloc(sizeof(Objeto));
-	btProx->altura = 98;
-	btProx->largura = 310;
-	btProx->imagem = btProxN;
-	btProx->wx = 0;
-	btProx->wy = 0;
-	btProx->x = 1010;
-	btProx->y = 480;
-
-	btReset = (Objeto*)malloc(sizeof(Objeto));
-	btReset->altura = 98;
-	btReset->largura = 310;
-	btReset->imagem = btResetN;
-	btReset->wx = 0;
-	btReset->wy = 0;
-	btReset->x = 1010;
-	btReset->y = 600;
-
-	btMenu = (Objeto*)malloc(sizeof(Objeto));
-	btMenu->altura = 98;
-	btMenu->largura = 310;
-	btMenu->imagem = btMenuN;
-	btMenu->wx = 0;
-	btMenu->wy = 0;
-	btMenu->x = 1010;
-	btMenu->y = 720;
-
-	//load na fonte
-	font = al_load_ttf_font("fontes/fonte2.ttf", 20, 0);
-
 	//variaveis de controle
 	bool sair = false;
 	int hist = 1;
@@ -147,9 +76,9 @@ int jogarLampada(ALLEGRO_DISPLAY* display, ALLEGRO_EVENT_QUEUE* filaDeEventos, P
 			//passando a historia
 			if (estado == historia) {
 				hist++;
-				if (hist > 3) {
+				if (hist > 3) 
 					estado = inicio;
-				}
+				
 			}
 
 			//verifivações, se clicou no elemento errado == gameover, caso contrario, continua jogando
@@ -246,10 +175,8 @@ int jogarLampada(ALLEGRO_DISPLAY* display, ALLEGRO_EVENT_QUEUE* filaDeEventos, P
 				}
 
 			if (progresso->cenario->coranteG->naEstante == false && progresso->cenario->coranteG->podeClicar == true) {
-				//clique no hidrogenio
 				if (mouseHover(mouseX, mouseY, 280, 470, 150, 153)) {
 
-					//skill test do hidrogenio
 
 					if (progresso->cenario->agua->naEstante == false) {
 
@@ -271,10 +198,7 @@ int jogarLampada(ALLEGRO_DISPLAY* display, ALLEGRO_EVENT_QUEUE* filaDeEventos, P
 			}
 
 			if (progresso->cenario->coranteR->naEstante == false && progresso->cenario->coranteR->podeClicar == true) {
-				//clique no hidrogenio
 				if (mouseHover(mouseX, mouseY, 280, 470, 150, 153)) {
-
-					//skill test do hidrogenio
 
 					if (progresso->cenario->agua->naEstante == false) {
 
@@ -298,7 +222,6 @@ int jogarLampada(ALLEGRO_DISPLAY* display, ALLEGRO_EVENT_QUEUE* filaDeEventos, P
 			if (progresso->cenario->agua->naEstante == false && progresso->cenario->agua->podeClicar == true) {
 
 				if (mouseHover(mouseX, mouseY, 80, 430, 150, 203)) {
-					//skill test da agua
 					
 					if (estado == clicouCoranteG || estado == clicouCoranteR) {
 						bool resultado = acerteVerde(display, filaDeEventos, progresso);
@@ -326,7 +249,6 @@ int jogarLampada(ALLEGRO_DISPLAY* display, ALLEGRO_EVENT_QUEUE* filaDeEventos, P
 			if (progresso->cenario->oleo->naEstante == false && progresso->cenario->oleo->podeClicar == true) {
 				if (mouseHover(mouseX, mouseY, 800, 430, 150, 203)) {
 					if (estado == reciG || estado == reciR) {
-						//skill test do vinagre
 						bool resultado = acerteVerde(display, filaDeEventos, progresso);
 						if (resultado == true) {
 							if(estado == reciR)
@@ -346,17 +268,11 @@ int jogarLampada(ALLEGRO_DISPLAY* display, ALLEGRO_EVENT_QUEUE* filaDeEventos, P
 			if (progresso->cenario->comprimido->naEstante == false && progresso->cenario->comprimido->podeClicar == true) {
 				if (mouseHover(mouseX, mouseY, 950, 500, 150, 203)) {
 					if (estado == clicouOleoG || estado == clicouOleoR) {
-						//skill test do vinagre
-						//bool resultado = acerteVerde(display, filaDeEventos, progresso);
-						//if (resultado == true) {
 							if (estado == clicouOleoG)
 								estado = clicouCompG;
 							else
 								estado = clicouCompR;
 							progresso->cenario->comprimido->podeClicar = false;
-						//}
-						//else
-							//estado = errou;
 					}
 					else
 						estado = errou;
@@ -364,19 +280,19 @@ int jogarLampada(ALLEGRO_DISPLAY* display, ALLEGRO_EVENT_QUEUE* filaDeEventos, P
 			}
 			else if (estado == acertou) {
 				//cliques nos botões em caso de acerto
-				if (mouseHover(mouseX, mouseY, btProx->x, btProx->y, btProx->largura, btProx->altura)) {
+				if (mouseHover(mouseX, mouseY, progresso->cenario->btProx->x, progresso->cenario->btProx->y, progresso->cenario->btProx->largura, progresso->cenario->btProx->altura)) {
 
 					sair = true;
 					progresso->proximaReacao = 6;
 				}
 
-				if (mouseHover(mouseX, mouseY, btReset->x, btReset->y, btReset->largura, btReset->altura)) {
+				if (mouseHover(mouseX, mouseY, progresso->cenario->btReset->x, progresso->cenario->btReset->y, progresso->cenario->btReset->largura, progresso->cenario->btReset->altura)) {
 					progresso->proximaReacao = 5;
 					sair = true;
 
 				}
 
-				if (mouseHover(mouseX, mouseY, btMenu->x, btMenu->y, btMenu->largura, btMenu->altura)) {
+				if (mouseHover(mouseX, mouseY, progresso->cenario->btMenu->x, progresso->cenario->btMenu->y, progresso->cenario->btMenu->largura, progresso->cenario->btMenu->altura)) {
 					sair = true;
 					progresso->proximaReacao = 0;
 				}
@@ -384,12 +300,12 @@ int jogarLampada(ALLEGRO_DISPLAY* display, ALLEGRO_EVENT_QUEUE* filaDeEventos, P
 
 			else if (estado == errou) {
 				//cliques nos botões em caso de erro
-				if (mouseHover(mouseX, mouseY, btReset->x, btReset->y, btReset->largura, btReset->altura)) {
+				if (mouseHover(mouseX, mouseY, progresso->cenario->btReset->x, progresso->cenario->btReset->y, progresso->cenario->btReset->largura, progresso->cenario->btReset->altura)) {
 					sair = true;
 					progresso->proximaReacao = 5;
 				}
 
-				if (mouseHover(mouseX, mouseY, btMenu->x, btMenu->y, btMenu->largura, btMenu->altura)) {
+				if (mouseHover(mouseX, mouseY, progresso->cenario->btMenu->x, progresso->cenario->btMenu->y, progresso->cenario->btMenu->largura, progresso->cenario->btMenu->altura)) {
 					sair = true;
 					progresso->proximaReacao = 0;
 				}
@@ -397,50 +313,22 @@ int jogarLampada(ALLEGRO_DISPLAY* display, ALLEGRO_EVENT_QUEUE* filaDeEventos, P
 
 }
 
-
-
-			
-		
-
-		//mudando imagem do botão quando o mouse passar em cima
-		if (estado == acertou || estado == errou) 
-			
-			if (mouseHover(mouseX, mouseY, btProx->x, btProx->y, btProx->largura, btProx->altura)) 
-				btProx->imagem = btProxH;
-
-			else
-				btProx->imagem = btProxN;
-			
-			if (mouseHover(mouseX, mouseY, btReset->x, btReset->y, btReset->largura, btReset->altura)) 
-				btReset->imagem = btResetH;
-
-			else
-				btReset->imagem = btResetN;
-
-			if (mouseHover(mouseX, mouseY, btMenu->x, btMenu->y, btMenu->largura, btMenu->altura)) 
-				btMenu->imagem = btMenuH;
-			
-
-			else
-				btMenu->imagem = btMenuN;
-
-		
 		//desenhos da historia
 		if (estado == historia) {
 
 			if (hist == 1) 
-				dialogo = fala1;
+				dialogo = progresso->cenario->fase4->fala1;
 			
 
 			else if (hist == 2) 
-				dialogo = fala2;
-			
+				dialogo = progresso->cenario->fase4->fala2;
+
 
 			else if (hist == 3) 
-				dialogo = fala3;
-			
+				dialogo = progresso->cenario->fase4->fala3;
 
-			al_draw_bitmap(escritorio, 0, 0, 0);
+
+			al_draw_bitmap(progresso->cenario->escritorio, 0, 0, 0);
 			al_draw_bitmap(dialogo, 0, 0, 0);
 
 		}
@@ -448,109 +336,128 @@ int jogarLampada(ALLEGRO_DISPLAY* display, ALLEGRO_EVENT_QUEUE* filaDeEventos, P
 		//desenhos da fase em geral
 		else {
 			al_clear_to_color(al_map_rgb(255, 255, 255));
-			al_draw_bitmap(progresso->cenario->fundo, 0, 0, 0);
+			al_draw_bitmap(progresso->cenario->lab, 0, 0, 0);
 			desenhaRegentes(progresso);
-			desenharTextos(progresso, font, mouseX, mouseY);
-			al_draw_bitmap(recipiente, 600, 360, 0);
-			
+			desenharTextos(progresso, progresso->cenario->font, mouseX, mouseY);
+			al_draw_bitmap(progresso->cenario->recipiente->imagemEstante, 600, 360, 0);
 			
 			if (progresso->cenario->coranteG->naEstante == false) 
-				al_draw_bitmap(coranteGMesa, 280, 460, 0);
+				al_draw_bitmap(progresso->cenario->fase4->coranteGMesa, 280, 460, 0);
 			
 
 			if (progresso->cenario->coranteR->naEstante == false) 
-				al_draw_bitmap(coranteRMesa, 280, 460, 0);
+				al_draw_bitmap(progresso->cenario->fase4->coranteRMesa, 280, 460, 0);
 			
 			
 			if (progresso->cenario->oleo->naEstante == false) 
-				al_draw_bitmap(oleoMesa, 800, 430, 0);
+				al_draw_bitmap(progresso->cenario->fase4->oleoMesa, 800, 430, 0);
 			
 			if (progresso->cenario->comprimido->naEstante == false) 
-				al_draw_bitmap(comprimidoMesa,950, 500, 0);
+				al_draw_bitmap(progresso->cenario->fase4->comprimidoMesa,950, 500, 0);
 			
 			
 			//switch case do estado para controlar os desenhos
 			switch (estado) {
-
-				case inicio:
-					if (progresso->cenario->agua->naEstante == false)
-						al_draw_bitmap(aguaMesa, 80, 430, 0);
-					break;
+	
+			case inicio:
+				if (progresso->cenario->agua->naEstante == false)
+					al_draw_bitmap(progresso->cenario->fase4->aguaMesa, 80, 430, 0);
+				break;
 					
 			case clicouCoranteG:
-				al_draw_bitmap(aguaG, 80, 430, 0);
+				al_draw_bitmap(progresso->cenario->fase4->aguaG, 80, 430, 0);
 				break;
 
 			case clicouCoranteR:
-				al_draw_bitmap(aguaR, 80, 430, 0);
+				al_draw_bitmap(progresso->cenario->fase4->aguaR, 80, 430, 0);
 				break;
 
 			case reciG:
-				al_draw_bitmap(becker, 80, 430, 0);
-				al_draw_bitmap(reciAguaG, 600, 360, 0);
+				al_draw_bitmap(progresso->cenario->becker->imagemEstante, 80, 430, 0);
+				al_draw_bitmap(progresso->cenario->fase4->reciAguaG, 600, 360, 0);
 				break;
 
 			case reciR:
-				al_draw_bitmap(becker, 80, 430, 0);
-				al_draw_bitmap(reciAguaR, 600, 360, 0);
+				al_draw_bitmap(progresso->cenario->becker->imagemEstante, 80, 430, 0);
+				al_draw_bitmap(progresso->cenario->fase4->reciAguaR, 600, 360, 0);
 				break;
 
 			case clicouOleoR:
-				al_draw_bitmap(becker, 80, 430, 0);
-				al_draw_bitmap(reciAguaOleoR, 600, 360, 0);
+				al_draw_bitmap(progresso->cenario->becker->imagemEstante, 80, 430, 0);
+				al_draw_bitmap(progresso->cenario->fase4->reciAguaOleoR, 600, 360, 0);
 				break;
 
 			case clicouOleoG:
-				al_draw_bitmap(becker, 80, 430, 0);
-				al_draw_bitmap(reciAguaOleoG, 600, 360, 0);
+				al_draw_bitmap(progresso->cenario->becker->imagemEstante, 80, 430, 0);
+				al_draw_bitmap(progresso->cenario->fase4->reciAguaOleoG, 600, 360, 0);
 				break;
 
 			case clicouCompR:
-				al_draw_bitmap(becker, 80, 430, 0);
-				reciFinal = lampadaR1;
-				reciFinal2 = lampadaR2;
+				al_draw_bitmap(progresso->cenario->becker->imagemEstante, 80, 430, 0);
+				reciFinal = progresso->cenario->fase4->lampadaR1;
+				reciFinal2 = progresso->cenario->fase4->lampadaR2;
 				estado = acertou;
 				break;
 
 			case clicouCompG:
-				al_draw_bitmap(becker, 80, 430, 0);
-				reciFinal = lampadaG1;
-				reciFinal2 = lampadaG2;
+				al_draw_bitmap(progresso->cenario->becker->imagemEstante, 80, 430, 0);
+				reciFinal = progresso->cenario->fase4->lampadaG1;
+				reciFinal2 = progresso->cenario->fase4->lampadaG2;
 				estado = acertou;
 				break;
 
 			case acertou:
-				al_draw_bitmap(becker, 80, 430, 0);
+				al_draw_bitmap(progresso->cenario->becker->imagemEstante, 80, 430, 0);
 				bloquearCliques(progresso);
-				al_draw_bitmap(btProx->imagem, btProx->x, btProx->y, 0);
-				al_draw_bitmap(btReset->imagem, btReset->x, btReset->y, 0);
-				al_draw_bitmap(btMenu->imagem, btMenu->x, btMenu->y, 0);
+				
+				if (mouseHover(mouseX, mouseY, progresso->cenario->btProx->x, progresso->cenario->btProx->y, progresso->cenario->btProx->largura, progresso->cenario->btProx->altura))
+					al_draw_bitmap(progresso->cenario->btProx->hover, progresso->cenario->btProx->x, progresso->cenario->btProx->y, 0);
+
+				else
+					al_draw_bitmap(progresso->cenario->btProx->norm, progresso->cenario->btProx->x, progresso->cenario->btProx->y, 0);
+
+				if (mouseHover(mouseX, mouseY, progresso->cenario->btReset->x, progresso->cenario->btReset->y, progresso->cenario->btReset->largura, progresso->cenario->btReset->altura))
+					al_draw_bitmap(progresso->cenario->btReset->hover, progresso->cenario->btReset->x, progresso->cenario->btReset->y, 0);
+
+				else
+					al_draw_bitmap(progresso->cenario->btReset->norm, progresso->cenario->btReset->x, progresso->cenario->btReset->y, 0);
+
+				if (mouseHover(mouseX, mouseY, progresso->cenario->btMenu->x, progresso->cenario->btMenu->y, progresso->cenario->btMenu->largura, progresso->cenario->btMenu->altura))
+					al_draw_bitmap(progresso->cenario->btMenu->hover, progresso->cenario->btMenu->x, progresso->cenario->btMenu->y, 0);
+
+				else
+					al_draw_bitmap(progresso->cenario->btMenu->norm, progresso->cenario->btMenu->x, progresso->cenario->btMenu->y, 0);
+
 				timer++;
 
 				if (timer >= 0 && timer <= 60)
 					al_draw_bitmap(reciFinal, 600, 360, 0);
 
-
-
 				else if (timer >= 60 && timer <= 120) {
 					al_draw_bitmap(reciFinal2, 600, 360, 0);
 					
-				 
 					if (timer >= 120 && timer <= 180) {
 					
 						timer = 0;
 				
 					}
-				
 				}
 
 				break;
 
-
 			case errou:
 				bloquearCliques(progresso);
-				al_draw_bitmap(btReset->imagem, btReset->x, btReset->y, 0);
-				al_draw_bitmap(btMenu->imagem, btMenu->x, btMenu->y, 0);
+				if (mouseHover(mouseX, mouseY, progresso->cenario->btReset->x, progresso->cenario->btReset->y, progresso->cenario->btReset->largura, progresso->cenario->btReset->altura))
+					al_draw_bitmap(progresso->cenario->btReset->hover, progresso->cenario->btReset->x, progresso->cenario->btReset->y, 0);
+
+				else
+					al_draw_bitmap(progresso->cenario->btReset->norm, progresso->cenario->btReset->x, progresso->cenario->btReset->y, 0);
+
+				if (mouseHover(mouseX, mouseY, progresso->cenario->btMenu->x, progresso->cenario->btMenu->y, progresso->cenario->btMenu->largura, progresso->cenario->btMenu->altura))
+					al_draw_bitmap(progresso->cenario->btMenu->hover, progresso->cenario->btMenu->x, progresso->cenario->btMenu->y, 0);
+
+				else
+					al_draw_bitmap(progresso->cenario->btMenu->norm, progresso->cenario->btMenu->x, progresso->cenario->btMenu->y, 0);
 				break;
 			}
 
@@ -584,39 +491,12 @@ int jogarLampada(ALLEGRO_DISPLAY* display, ALLEGRO_EVENT_QUEUE* filaDeEventos, P
 		al_flip_display();
 }
 
-progresso->cenario->agua->naEstante = true;
-progresso->cenario->oleo->naEstante = true;
-progresso->cenario->comprimido->naEstante = true;
-progresso->cenario->coranteG->naEstante = true;
-progresso->cenario->coranteR->naEstante = true;
+	progresso->cenario->agua->naEstante = true;
+	progresso->cenario->oleo->naEstante = true;
+	progresso->cenario->comprimido->naEstante = true;
+	progresso->cenario->coranteG->naEstante = true;
+	progresso->cenario->coranteR->naEstante = true;
 	
-
-	//destruindo imagens 
-	al_destroy_bitmap(progresso->cenario->fundo);
-	destruirBitmaps(progresso);
-	//al_destroy_bitmap(vinagreMesa);
-	//al_destroy_bitmap(bicarbonatoMesa);
-	al_destroy_bitmap(recipiente);
-	//al_destroy_bitmap(recipienteVinagre);
-	
-	//al_destroy_bitmap(recipienteFeito3);
-	//al_destroy_bitmap(vapor);
-	al_destroy_bitmap(btProxH);
-	al_destroy_bitmap(btProxN);
-	al_destroy_bitmap(btMenuH);
-	al_destroy_bitmap(btMenuN);
-	al_destroy_bitmap(btResetH);
-	al_destroy_bitmap(btResetN);
-	al_destroy_bitmap(fala1);
-	al_destroy_bitmap(fala2);
-	al_destroy_bitmap(fala3);
-
-	al_destroy_font(font);
-
-	free(btMenu);
-	free(btProx);
-	free(btReset);
-
 	return 0;
 }
 
