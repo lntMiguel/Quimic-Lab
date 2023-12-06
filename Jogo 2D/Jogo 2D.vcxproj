@@ -151,6 +151,7 @@
     <ClInclude Include="aurora.h" />
     <ClInclude Include="camaleao.h" />
     <ClInclude Include="comoJogar.h" />
+    <ClInclude Include="final.h" />
     <ClInclude Include="lampada.h" />
     <ClInclude Include="menu.h" />
     <ClInclude Include="serpente.h" />

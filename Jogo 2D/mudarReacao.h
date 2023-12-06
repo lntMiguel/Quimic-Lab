@@ -14,6 +14,7 @@
 #include "lampada.h"
 #include "aurora.h"
 #include "serpente.h"
+#include "final.h"
 #ifndef mudarReacao_H
 #define mudarReacao_H
 
@@ -51,6 +52,9 @@ void selecionaReacao(ALLEGRO_DISPLAY* display, ALLEGRO_EVENT_QUEUE* filaDeEvento
 	case 7:
 		jogarSerpente(display, filaDeEventos, progresso);
 		return;
+
+	case 8:
+		jogarFinal(display, filaDeEventos, progresso);
 	default:
 		break;
 	}

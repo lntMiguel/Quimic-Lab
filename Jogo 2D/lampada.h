@@ -350,7 +350,7 @@ int jogarLampada(ALLEGRO_DISPLAY* display, ALLEGRO_EVENT_QUEUE* filaDeEventos, P
 			
 			
 			if (progresso->cenario->oleo->naEstante == false) 
-				al_draw_bitmap(progresso->cenario->fase4->oleoMesa, 800, 430, 0);
+				al_draw_bitmap(progresso->cenario->fase4->oleoMesa, 350, 430, 0);
 			
 			if (progresso->cenario->comprimido->naEstante == false) 
 				al_draw_bitmap(progresso->cenario->fase4->comprimidoMesa,950, 500, 0);

@@ -185,7 +185,14 @@ int jogarAurora(ALLEGRO_DISPLAY* display, ALLEGRO_EVENT_QUEUE* filaDeEventos, Pr
 					//skill test do hidrogenio
 
 					if (estado == clicouAcido) {
+						bool resultado = equilibrio(display, filaDeEventos, progresso);
+						if (resultado == true) {
+							estado = clicouCloreto;
+							progresso->cenario->cDeCobre->podeClicar = false;
+						}
 
+						else
+							estado = errou;
 						estado = clicouCloreto;
 						/*bool resultado = acerteVerde(display, filaDeEventos, progresso);
 
@@ -195,7 +202,7 @@ int jogarAurora(ALLEGRO_DISPLAY* display, ALLEGRO_EVENT_QUEUE* filaDeEventos, Pr
 						}
 						else
 							estado = errou;*/
-						progresso->cenario->cDeCobre->podeClicar = false;
+				
 					}
 
 					else

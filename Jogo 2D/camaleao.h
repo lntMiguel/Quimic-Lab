@@ -190,8 +190,15 @@ int jogarCamaleao(ALLEGRO_DISPLAY* display, ALLEGRO_EVENT_QUEUE* filaDeEventos, 
 					//skill test do hidrogenio
 
 					if (estado == clicouAgua) {
-						
-						estado = clicouSoda;
+						bool resultado = equilibrio(display, filaDeEventos, progresso);
+						if (resultado == true) {
+							estado = clicouSoda;
+							progresso->cenario->soda->podeClicar = false;
+						}
+
+						else
+							estado = errou;
+				
 						/*bool resultado = acerteVerde(display, filaDeEventos, progresso);
 
 						if (resultado == true) {
@@ -214,8 +221,15 @@ int jogarCamaleao(ALLEGRO_DISPLAY* display, ALLEGRO_EVENT_QUEUE* filaDeEventos, 
 					//skill test do hidrogenio
 
 					if (estado == clicouSoda) {
+						bool resultado = equilibrio(display, filaDeEventos, progresso);
+						if (resultado == true) {
+							estado = clicouAcucar;
+							progresso->cenario->soda->podeClicar = false;
+						}
 
-						estado = clicouAcucar;
+						else
+							estado = errou;
+			
 						/*bool resultado = acerteVerde(display, filaDeEventos, progresso);
 
 						if (resultado == true) {
@@ -237,7 +251,6 @@ int jogarCamaleao(ALLEGRO_DISPLAY* display, ALLEGRO_EVENT_QUEUE* filaDeEventos, 
 					//skill test do hidrogenio
 
 					if (estado == clicouAgua2) {
-						bool resultado = acerteBecker(display, filaDeEventos, progresso);
 						estado = clicouPotassio;
 						/*bool resultado = acerteVerde(display, filaDeEventos, progresso);
 

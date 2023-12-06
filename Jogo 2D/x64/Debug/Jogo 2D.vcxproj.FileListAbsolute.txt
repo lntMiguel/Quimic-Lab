@@ -1,2 +1,3 @@
 C:\Users\edyjo\Documents\Projeto Integrador\Jogo 2D\x64\Debug\Jogo 2D.exe
 C:\Users\migue\OneDrive\Área de Trabalho\TrabalhoDePi\Quimic-Lab\Jogo 2D\x64\Debug\Jogo 2D.exe
+E:\TrabalhoDePi\Quimic-Lab\Jogo 2D\x64\Debug\Jogo 2D.exe

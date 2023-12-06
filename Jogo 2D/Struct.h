@@ -14,7 +14,7 @@ typedef struct obj { // <- obj recebe malloc
 	int x, y, largura, altura, wx, wy;
 	ALLEGRO_BITMAP* imagem; 
 
-} Objeto;
+}Objeto;
 
 typedef struct bt { // <- obj recebe malloc
 	int x, y, largura, altura, wx, wy;
@@ -31,6 +31,11 @@ typedef struct reagentes {
 	bool naEstante;
 
 }Reagente;
+
+typedef struct final {
+	ALLEGRO_BITMAP* falaFinal;
+	ALLEGRO_BITMAP* contrato;
+}Final;
 
 typedef struct fase1 {
 	ALLEGRO_BITMAP* ACestagio1;
@@ -135,18 +140,6 @@ typedef struct fase6 {
 	ALLEGRO_BITMAP* serpente8;
 }Fase6;
 
-typedef struct st
-{
-	ALLEGRO_BITMAP* bitmap;
-	int x;
-	int y;
-	int largura;
-	int altura;
-	int cliqueX;
-	int cliqueY;
-
-} St;
-
 typedef struct cenario {
 	ALLEGRO_BITMAP* lab; 
 	ALLEGRO_BITMAP* escritorio;
@@ -180,10 +173,9 @@ typedef struct cenario {
 	Botao* btReset;
 	Botao* btProx;
 	Botao* btMenu;
+	Final* final;
 	ALLEGRO_FONT* font;
-	St* mao, *barraH, *barraV, *marcaH, *marcaV, *bala;
 } Cenario;
-
 
 typedef struct progresso {
 	int proximaReacao;
