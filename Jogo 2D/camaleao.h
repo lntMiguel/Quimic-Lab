@@ -237,7 +237,7 @@ int jogarCamaleao(ALLEGRO_DISPLAY* display, ALLEGRO_EVENT_QUEUE* filaDeEventos, 
 					//skill test do hidrogenio
 
 					if (estado == clicouAgua2) {
-
+						bool resultado = acerteBecker(display, filaDeEventos, progresso);
 						estado = clicouPotassio;
 						/*bool resultado = acerteVerde(display, filaDeEventos, progresso);
 

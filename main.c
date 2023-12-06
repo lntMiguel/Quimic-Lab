@@ -57,7 +57,7 @@ int main() {
 
 	Prog progresso;
 	
-	progresso.proximaReacao = 0;
+	progresso.proximaReacao = 4;
 	progresso.fimDeJogo = 0;
 	progresso.reacoes[0] = 0;
 	progresso.reacoes[1] = 0;
@@ -69,6 +69,48 @@ int main() {
 
 	progresso.cenario = (Cenario*)malloc(sizeof(Cenario));
 	
+	progresso.cenario->mao = (St*)malloc(sizeof(St));
+	progresso.cenario->mao->bitmap = al_load_bitmap("imagens/maoPotassio.png");
+	progresso.cenario->mao->x = 1000;
+	progresso.cenario->mao->y = 600;
+	progresso.cenario->mao->largura = 300;
+	progresso.cenario->mao->altura = 300;
+
+	progresso.cenario->barraH = (St*)malloc(sizeof(St));
+	progresso.cenario->barraH->bitmap = al_load_bitmap("imagens/barraH.png");
+	progresso.cenario->barraH->x = progresso.cenario->mao->x;
+	progresso.cenario->barraH->y = progresso.cenario->mao->y + progresso.cenario->mao->altura + 20;
+	progresso.cenario->barraH->largura = 100;
+	progresso.cenario->barraH->altura = 10;
+
+	progresso.cenario->barraV = (St*)malloc(sizeof(St));
+	progresso.cenario->barraV->bitmap = al_load_bitmap("imagens/barraV.png");
+	progresso.cenario->barraV->x = progresso.cenario->mao->x - 30;
+	progresso.cenario->barraV->y = progresso.cenario->mao->y;
+	progresso.cenario->barraV->largura = 10;
+	progresso.cenario->barraV->altura = 100;
+
+	progresso.cenario->marcaH = (St*)malloc(sizeof(St));
+	progresso.cenario->marcaH->bitmap = al_load_bitmap("imagens/marcaH.png");
+	progresso.cenario->marcaH->x = progresso.cenario->barraH->x + progresso.cenario->barraH->largura - 10;
+	progresso.cenario->marcaH->y = progresso.cenario->barraH->y - 10;
+	progresso.cenario->marcaH->largura = 10;
+	progresso.cenario->marcaH->altura = 30;
+
+	progresso.cenario->marcaV = (St*)malloc(sizeof(St));
+	progresso.cenario->marcaV->bitmap = al_load_bitmap("imagens/marcaV.png");;
+	progresso.cenario->marcaV->x = progresso.cenario->barraV->x - 10;
+	progresso.cenario->marcaV->y = progresso.cenario->barraV->y + progresso.cenario->barraV->altura / 2 - 5;
+	progresso.cenario->marcaV->largura = 30;
+	progresso.cenario->marcaV->altura = 10;
+
+	progresso.cenario->bala = (St*)malloc(sizeof(St));
+	progresso.cenario->bala->bitmap = al_load_bitmap("imagens/x.png");
+	progresso.cenario->bala->x = 0;
+	progresso.cenario->bala->y = 0;
+	progresso.cenario->bala->largura = 20;
+	progresso.cenario->bala->altura = 20;
+
 	progresso.cenario->bicarbonato = (Reagente*)malloc(sizeof(Reagente));
 	progresso.cenario->bicarbonato->imagemEstante = al_load_bitmap("imagens/bicarbonatoEstante.png");
 	progresso.cenario->bicarbonato->altura = 100;

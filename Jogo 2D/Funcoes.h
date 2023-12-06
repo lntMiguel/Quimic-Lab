@@ -237,4 +237,10 @@ void carregarImg(Prog* progresso) {
 	progresso->cenario->potassio->imagemEstante = al_load_bitmap("imagens/potassioEstante.png");
 	progresso->cenario->soda->imagemEstante = al_load_bitmap("imagens/sodaEstante.png");
 }
+
+int MapearDistancia(int ponto, int c) {
+	return ponto - c;
+}
+
+
 #endif

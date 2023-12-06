@@ -177,12 +177,20 @@ int jogarAcidoCarbonico(ALLEGRO_DISPLAY* display, ALLEGRO_EVENT_QUEUE* filaDeEve
 					//clique no bicarbonato
 					if (mouseHover(mouseX, mouseY, 900, 470, 150, 161)) {
 						if (estado == clicouVinagre) {
-							estado = clicouBicarbonato;
-							progresso->cenario->bicarbonato->podeClicar = false;
+							bool resultado = equilibrio(display, filaDeEventos, progresso);
+							if (resultado == true) {
+								estado = clicouBicarbonato;
+								progresso->cenario->bicarbonato->podeClicar = false;
+							}
+
+							else
+								estado = errou;
+
 						}
+						else
+							estado = errou;
 					}
 				}
-
 
 
 				else if (estado == acertou) {

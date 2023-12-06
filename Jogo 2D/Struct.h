@@ -135,6 +135,17 @@ typedef struct fase6 {
 	ALLEGRO_BITMAP* serpente8;
 }Fase6;
 
+typedef struct st
+{
+	ALLEGRO_BITMAP* bitmap;
+	int x;
+	int y;
+	int largura;
+	int altura;
+	int cliqueX;
+	int cliqueY;
+
+} St;
 
 typedef struct cenario {
 	ALLEGRO_BITMAP* lab; 
@@ -170,6 +181,7 @@ typedef struct cenario {
 	Botao* btProx;
 	Botao* btMenu;
 	ALLEGRO_FONT* font;
+	St* mao, *barraH, *barraV, *marcaH, *marcaV, *bala;
 } Cenario;
 
 
