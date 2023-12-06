@@ -43,7 +43,7 @@ int jogarSerpente(ALLEGRO_DISPLAY* display, ALLEGRO_EVENT_QUEUE* filaDeEventos, 
 
 	};
 
-	enum Estados estado = inicio;
+	enum Estados estado = historia;
 
 	//looping principal
 	while (!sair) {
@@ -275,7 +275,7 @@ int jogarSerpente(ALLEGRO_DISPLAY* display, ALLEGRO_EVENT_QUEUE* filaDeEventos, 
 				al_draw_bitmap(progresso->cenario->fase6->bicarbonatoMesa, 400, 470, 0);
 
 			if (progresso->cenario->macarico->naEstante == false)
-				al_draw_bitmap(progresso->cenario->fase6->macaricoMesa, 80, 430, 0);
+				al_draw_bitmap(progresso->cenario->fase6->macaricoMesa, 80, 480, 0);
 
 
 			//switch case do estado para controlar os desenhos

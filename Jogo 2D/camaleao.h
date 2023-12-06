@@ -308,7 +308,7 @@ int jogarCamaleao(ALLEGRO_DISPLAY* display, ALLEGRO_EVENT_QUEUE* filaDeEventos, 
 
 			}
 
-			else if (estado == errou) {
+			 if (estado == errou) {
 				//cliques nos botões em caso de erro
 				if (mouseHover(mouseX, mouseY, progresso->cenario->btReset->x, progresso->cenario->btReset->y, progresso->cenario->btReset->largura, progresso->cenario->btReset->altura)) {
 					sair = true;

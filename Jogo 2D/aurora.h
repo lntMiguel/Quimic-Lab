@@ -302,7 +302,7 @@ int jogarAurora(ALLEGRO_DISPLAY* display, ALLEGRO_EVENT_QUEUE* filaDeEventos, Pr
 				al_draw_bitmap(progresso->cenario->fase5->cDeCobreMesa, 280, 470, 0);
 
 			if (progresso->cenario->macarico->naEstante == false)
-				al_draw_bitmap(progresso->cenario->fase5->macaricoMesa, 800, 430, 0);
+				al_draw_bitmap(progresso->cenario->fase5->macaricoMesa, 800, 480, 0);
 
 
 			//switch case do estado para controlar os desenhos
@@ -312,7 +312,7 @@ int jogarAurora(ALLEGRO_DISPLAY* display, ALLEGRO_EVENT_QUEUE* filaDeEventos, Pr
 				al_draw_bitmap(progresso->cenario->recipiente->imagemEstante, 600, 360, 0);
 
 				if (progresso->cenario->aluminio->naEstante == false)
-					al_draw_bitmap(progresso->cenario->fase5->papelAlum, 1100, 500, 0);
+					al_draw_bitmap(progresso->cenario->fase5->papelAlum, 1100, 550, 0);
 
 				break;
 

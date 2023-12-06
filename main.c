@@ -268,7 +268,7 @@ int main() {
 	progresso.cenario->recipiente->naEstante = true;
 
 	progresso.cenario->becker = (Reagente*)malloc(sizeof(Reagente));
-	progresso.cenario->becker->imagemEstante = al_load_bitmap("imagens/sodaEstante.png");
+	progresso.cenario->becker->imagemEstante = al_load_bitmap("imagens/beckerMesa.png");
 	progresso.cenario->becker->altura = 100;
 	progresso.cenario->becker->largura = 108;
 	progresso.cenario->becker->wx = 0;
@@ -306,19 +306,7 @@ int main() {
 	progresso.cenario->fase2->fala1 = al_load_bitmap("imagens/fase2/fase2H1.png");
 	progresso.cenario->fase2->fala2 = al_load_bitmap("imagens/fase2/fase2H2.png");
 	progresso.cenario->fase2->fala3 = al_load_bitmap("imagens/fase2/fase2H3.png");
-	progresso.cenario->fase2->hidrogenioMesa = al_load_bitmap("imagens/fase2/hidrogemioMesa.png");
-	progresso.cenario->fase2->aviso = al_load_bitmap("imagens/fase2/aviso.png");
-
-	progresso.cenario->fase2 = (Fase2*)malloc(sizeof(Fase2));
-	progresso.cenario->fase2->lumiE1 = al_load_bitmap("imagens/fase2/lumiE1.png");
-	progresso.cenario->fase2->lumiE2 = al_load_bitmap("imagens/fase2/lumiE2.png");
-	progresso.cenario->fase2->luminolMesa = al_load_bitmap("imagens/fase2/lumiMesa.png");
-	progresso.cenario->fase2->recipienteLuminol = al_load_bitmap("imagens/fase2/reciLumi.png");
-	progresso.cenario->fase2->fundoEscuro = al_load_bitmap("imagens/fase2/fundoEscuro.png");
-	progresso.cenario->fase2->fala1 = al_load_bitmap("imagens/fase2/fase2H1.png");
-	progresso.cenario->fase2->fala2 = al_load_bitmap("imagens/fase2/fase2H2.png");
-	progresso.cenario->fase2->fala3 = al_load_bitmap("imagens/fase2/fase2H3.png");
-	progresso.cenario->fase2->hidrogenioMesa = al_load_bitmap("imagens/fase2/hidrogemioMesa.png");
+	progresso.cenario->fase2->hidrogenioMesa = al_load_bitmap("imagens/fase2/hidrogenioMesa.png");
 	progresso.cenario->fase2->aviso = al_load_bitmap("imagens/fase2/aviso.png");
 
 	progresso.cenario->fase3 = (Fase3*)malloc(sizeof(Fase3));
@@ -327,15 +315,15 @@ int main() {
 	progresso.cenario->fase3->sodaMesa = al_load_bitmap("imagens/fase3/sodaMesa.png");
 	progresso.cenario->fase3->beckerAguaSoda = al_load_bitmap("imagens/fase3/beckerAguaSoda.png");
 	progresso.cenario->fase3->beckerAguaPotassio = al_load_bitmap("imagens/fase3/beckerAguaPotassio.png");
-	progresso.cenario->fase3->fala1 = al_load_bitmap("imagens/fase3/fase2H1.png");
-	progresso.cenario->fase3->fala2 = al_load_bitmap("imagens/fase3/fase2H2.png");
-	progresso.cenario->fase3->fala3 = al_load_bitmap("imagens/fase3/fase2H3.png");
+	progresso.cenario->fase3->fala1 = al_load_bitmap("imagens/fase3/fase3H1.png");
+	progresso.cenario->fase3->fala2 = al_load_bitmap("imagens/fase3/fase3H2.png");
+	progresso.cenario->fase3->fala3 = al_load_bitmap("imagens/fase3/fase3H3.png");
 	progresso.cenario->fase3->beckerAguaSodaAcucar = al_load_bitmap("imagens/fase3/beckerAguaSodaAcucar.png");
 	progresso.cenario->fase3->recipienteMisturado = al_load_bitmap("imagens/fase3/recipienteMisturado.png");
 	progresso.cenario->fase3->recipienteRoxo = al_load_bitmap("imagens/fase3/recipienteRoxo.png");
 	progresso.cenario->fase3->recipienteLaranja = al_load_bitmap("imagens/fase3/recipienteLaranja.png");
 	progresso.cenario->fase3->recipienteVerde = al_load_bitmap("imagens/fase3/recipienteVerde.png");
-	progresso.cenario->fase3->fala4= al_load_bitmap("imagens/fase3/fase2H4.png");
+	progresso.cenario->fase3->fala4= al_load_bitmap("imagens/fase3/fase3H4.png");
 	progresso.cenario->fase3->potassioMesa = al_load_bitmap("imagens/fase3/potassioMesa.png");
 
 	progresso.cenario->fase4 = (Fase4*)malloc(sizeof(Fase4));
